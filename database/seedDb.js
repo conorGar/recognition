@@ -30,6 +30,13 @@ const main = async () => {
       email: 'jlendle246@gmail.com',
       password: 'password'
     })
+    const Connor = await User.create({
+      name: 'Connor Garity',
+      username: 'cg999',
+      linkedin: 'http://linkedin.com/cg999',
+      email: 'cgarity@gmail.com',
+      password: 'password'
+    })
     const project1 = await Project.create({
       name: 'Project 1',
       imgUrl: 'http://www.projectimg.com',
@@ -47,6 +54,12 @@ const main = async () => {
       imgUrl: 'http://www.project3img.com',
       description: 'blah blah',
       skills: 'React JS'
+    })
+    const project4 = await Project.create({
+      name: 'Project 4',
+      imgUrl: 'http://www.project4img.com',
+      description: 'blah blah',
+      skills: ''
     })
 
     // remember this stupid ass thing

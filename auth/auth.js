@@ -6,13 +6,11 @@ const jwt = require('jsonwebtoken')
 const JWTStrategy = require('passport-jwt').Strategy
 const ExtractJWT = require('passport-jwt').ExtractJwt
 
-require('dotenv').config();
+require('dotenv').config()
 
 const jwtSign = payload => {
   return jwt.sign(payload, process.env.SECRET)
 }
-
-
 
 passport.use(
   new JWTStrategy(
