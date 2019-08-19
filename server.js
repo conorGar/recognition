@@ -21,6 +21,6 @@ app.get('/', async (req, res) => {
 })
 
 app.use('/projects', ProjectRouter)
-app.use('/user', UserRouter)
+app.use('/users', UserRouter)
 
 app.listen(PORT, () => console.log(`Server Started On Port ${PORT}`))
