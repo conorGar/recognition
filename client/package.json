@@ -12,7 +12,8 @@
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",
     "semantic-ui-react": "^0.87.3",
-    "sequelize": "^5.15.1"
+    "sequelize": "^5.15.1",
+    "react-router-dom": "^5.0.1",
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,7 +22,8 @@
     "eject": "react-scripts eject",
     "db:init": "dropdb --if-exists icrud_db && createdb icrud_db && npm run db:reset && npm run db:seed",
     "db:reset": "node ./database/resetDb.js",
-    "db:seed": "node ./database/seedDb.js"
+    "db:seed": "node ./database/seedDb.js",
+    "db:go": "npm run db:reset && npm run db:seed"
   },
   "eslintConfig": {
     "extends": "react-app"
