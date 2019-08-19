@@ -31,6 +31,15 @@ ProjectRouter.post('/create/user/:id', async (request, response) => {
     const project = await Project.create(request.body)
     const user = await User.findByPk(request.params.id)
     project.setUsers(user)
+    const users = request.body.username.split(' ')
+    users.map(async element => {
+      let addedUser = await User.findOne({
+        where: {
+          username: element
+        }
+      })
+      return project.addUser(addedUser)
+    })
     response.json(project)
   } catch (e) {
     response.status(500).json({ msg: e.message })
