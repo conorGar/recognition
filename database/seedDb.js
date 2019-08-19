@@ -13,31 +13,40 @@ const main = async () => {
       name: 'James Kim',
       username: 'jkim3360',
       linkedin: 'http://linkedin.com/jkim3360',
-      email: 'jamesdaehokim@gmail.com'
+      email: 'jamesdaehokim@gmail.com',
+      password: 'password'
     })
     const David = await User.create({
       name: 'David Grosh',
       username: 'dgrosh123',
       linkedin: 'http://linkedin.com/dgrosh123',
-      email: 'dgrosh123@gmail.com'
+      email: 'dgrosh123@gmail.com',
+      password: 'password'
     })
     const Justin = await User.create({
       name: 'Justin Lendle',
       username: 'jlendle246',
       linkedin: 'http://linkedin.com/jlendle246',
-      email: 'jlendle246@gmail.com'
+      email: 'jlendle246@gmail.com',
+      password: 'password'
     })
     const project1 = await Project.create({
       name: 'Project 1',
-      projectImgUrl: 'http://www.projectimg.com'
+      imgUrl: 'http://www.projectimg.com',
+      description: 'blah blah',
+      skills: 'HTML CSS'
     })
     const project2 = await Project.create({
       name: 'Project 2',
-      projectImgUrl: 'http://www.project2img.com'
+      imgUrl: 'http://www.project2img.com',
+      description: 'blah blah',
+      skills: 'Node.js Crud'
     })
     const project3 = await Project.create({
       name: 'Project 3',
-      projectImgUrl: 'http://www.project3img.com'
+      imgUrl: 'http://www.project3img.com',
+      description: 'blah blah',
+      skills: 'React JS'
     })
 
     // remember this stupid ass thing
