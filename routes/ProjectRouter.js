@@ -26,12 +26,12 @@ ProjectRouter.get('/:id', async (request, response) => {
 })
 
 /********* CREATE -- localhost:PORT/restaurants *********/
-ProjectRouter.post('/create', async (request, response) => {
+ProjectRouter.post('/create/user/:id', async (request, response) => {
   try {
     const project = await Project.create(request.body)
-    response.json({
-      project
-    })
+    const user = await User.findByPk(request.params.id)
+    project.setUsers(user)
+    response.json(project)
   } catch (e) {
     response.status(500).json({ msg: e.message })
   }
@@ -58,8 +58,6 @@ ProjectRouter.put('/:id', async (request, response) => {
 ProjectRouter.delete('/:id', async (request, response) => {
   try {
     const id = request.params.id
-
-   
 
     await Project.destroy({
       where: {
