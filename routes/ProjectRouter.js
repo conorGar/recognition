@@ -59,6 +59,8 @@ ProjectRouter.delete('/:id', async (request, response) => {
   try {
     const id = request.params.id
 
+   
+
     await Project.destroy({
       where: {
         id: id

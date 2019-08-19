@@ -1,98 +1,83 @@
 const express = require('express')
-const { Restaurant, Review } = require('../database/models')
-const RestaurantRouter = express.Router()
+const { User, Project } = require('../database/models')
+const UserRouter = express.Router()
 
 /********* GET -- localhost:PORT/restaurants *********/
-RestaurantRouter.get('/', async (request, response) => {
-	try {
-		const restaurants = await Restaurant.findAll()
-		const restaurant = []
-		for (let i = 0; i < restaurants.length; i++) {
-			const findReviews = await Review.findAndCountAll({
-				where: { restaurantId: restaurants[i].dataValues.id }
-			})
-			let restaurantData = {
-				restaurant: restaurants[i],
-				reviews: findReviews.count
-			}
-			restaurant.push(restaurantData)
-		}
-		response.send(restaurant)
-	} catch (e) {
-		response.status(500).json({ msg: e.message })
-	}
+UserRouter.get('/', async (request, response) => {
+  try {
+    const users = await User.findAll()
+    response.send(users)
+  } catch (e) {
+    response.status(500).json({ msg: e.message })
+  }
 })
 
 /********* GET -- localhost:PORT/restaurants/2 *********/
-RestaurantRouter.get('/:id', async (request, response) => {
-	try {
-		const id = request.params.id
-		const restaurant = await Restaurant.findByPk(id, {
-			include: [Review]
-		})
-
-		if (!restaurant) throw Error('Restaurant not found')
-
-		response.json({
-			restaurant
-		})
-	} catch (e) {
-		response.status(404).json({ msg: e.message })
-	}
+UserRouter.get('/:id', async (request, response) => {
+  try {
+    const id = request.params.id
+    const user = await User.findByPk(id, {
+      include: [Project]
+    })
+    if (!user) throw Error('User not found')
+    response.json({
+      user
+    })
+  } catch (e) {
+    response.status(404).json({ msg: e.message })
+  }
 })
 
 /********* CREATE -- localhost:PORT/restaurants *********/
-RestaurantRouter.post('/', async (request, response) => {
-	try {
-		const restaurant = await Restaurant.create(request.body)
-		response.json({
-			restaurant
-		})
-	} catch (e) {
-		response.status(500).json({ msg: e.message })
-	}
+UserRouter.post('/signup', async (request, response) => {
+  try {
+    const newUser = await User.create(request.body)
+    response.json({
+      newUser
+    })
+  } catch (e) {
+    response.status(500).json({ msg: e.message })
+  }
 })
 
 /********* UPDATE -- localhost:PORT/restaurants/2 *********/
-RestaurantRouter.put('/:id', async (request, response) => {
-	try {
-		const id = request.params.id
-		const restaurant = await Restaurant.findByPk(id)
+UserRouter.put('/:id', async (request, response) => {
+  try {
+    const id = request.params.id
+    const updatedUser = await User.findByPk(id)
 
-		if (restaurant) await restaurant.update(request.body)
-		response.json({
-			restaurant
-		})
-	} catch (e) {
-		response.status(304).json({
-			message: e.message
-		})
-	}
+    if (updatedUser) await updatedUser.update(request.body)
+    response.json({
+      updatedUser
+    })
+  } catch (e) {
+    response.status(304).json({
+      message: e.message
+    })
+  }
 })
 
 /********* DELETE -- localhost:PORT/restaurants/2 *********/
-RestaurantRouter.delete('/:id', async (request, response) => {
-	try {
-		const id = request.params.id
+UserRouter.delete('/:id', async (request, response) => {
+  try {
+    const id = request.params.id
+    const userToDelete = await User.findByPk(id)
 
-		await Restaurant.destroy({
-			where: {
-				id: id
-			}
-		})
+    await User.destroy({
+      where: {
+        id: id
+      }
+	})
+	
+	if (user )
 
-		await Review.destroy({
-			where: {
-				restaurantId: id
-			}
-		})
-
-		response.json({
-			message: `Restaurant with id ${id} deleted`
-		})
-	} catch (e) {
-		response.json({ msg: e.message })
-	}
+	
+    response.json({
+      message: `Restaurant with id ${id} deleted`
+    })
+  } catch (e) {
+    response.json({ msg: e.message })
+  }
 })
 
-module.exports = RestaurantRouter
+module.exports = UserRouter
