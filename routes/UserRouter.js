@@ -61,19 +61,15 @@ UserRouter.put('/:id', async (request, response) => {
 UserRouter.delete('/:id', async (request, response) => {
   try {
     const id = request.params.id
-    const userToDelete = await User.findByPk(id)
 
     await User.destroy({
       where: {
         id: id
       }
-	})
-	
-	if (user )
+    })
 
-	
     response.json({
-      message: `Restaurant with id ${id} deleted`
+      message: `User with id ${id} deleted`
     })
   } catch (e) {
     response.json({ msg: e.message })
