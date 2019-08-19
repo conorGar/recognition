@@ -20,7 +20,7 @@ app.get('/', async (req, res) => {
 	res.send('connected')
 })
 
-app.use('/projects', ProjectRouter)
+app.use('/project', ProjectRouter)
 app.use('/users', UserRouter)
 
 app.listen(PORT, () => console.log(`Server Started On Port ${PORT}`))
