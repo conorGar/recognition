@@ -44,6 +44,10 @@ const Project = db.define('project', {
     defaultValue: 'Flatiron District',
     allowNull: false
   },
+  link: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   description: {
     type: Sequelize.TEXT,
     allowNull: false

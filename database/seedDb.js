@@ -41,25 +41,29 @@ const main = async () => {
       name: 'Project 1',
       imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'blah blah',
-      skills: 'HTML CSS'
+      skills: 'HTML CSS',
+      link: 'somewebsite.com'
     })
     const project2 = await Project.create({
       name: 'Project 2',
       imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
-      skills: 'Node.js Crud'
+      skills: 'Node.js Crud',
+      link: 'somewebsite.com'
     })
     const project3 = await Project.create({
       name: 'Project 3',
       imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
-      skills: 'React JS'
+      skills: 'React JS',
+      link: 'somewebsite.com'
     })
     const project4 = await Project.create({
       name: 'Project 4',
       imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
-      skills: 'Crud'
+      skills: 'Crud',
+      link: 'somewebsite.com'
     })
 
     await project1.setUsers(James)

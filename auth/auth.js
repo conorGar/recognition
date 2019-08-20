@@ -37,19 +37,18 @@ passport.use(
   'signup',
   new LocalStrategy(
     {
-      usernameField: 'email',
+      usernameField: 'username',
       passwordField: 'password',
       passReqToCallback: true
     },
-    async (req, email, password, done) => {
+    async (req, username, password, done) => {
       try {
-        const {
-          body: { name }
-        } = req
+        const { body: { name, email, linkedin } } = req
 
         const user = await User.create({
           name: name,
           email: email,
+          linkedin: linkedin,
           password: password
         })
 
@@ -68,14 +67,13 @@ passport.use(
   'login',
   new LocalStrategy(
     {
-      usernameField: 'email',
+      usernameField: 'username',
       passwordField: 'password'
     },
-    async (email, password, done) => {
+    async (username, password, done) => {
       try {
         // find user by their email
-        const user = await User.findOne({ where: { email: email } })
-        console.log(user.email)
+        const user = await User.findOne({ where: { username: username } })
         console.log(`*** user: ${user} ***`)
 
         if (!user) {
