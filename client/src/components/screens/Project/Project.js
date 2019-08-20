@@ -2,8 +2,8 @@ import React from 'react'
 import './Project.css'
 import { apiCall } from '../../../App'
 
-
 class Project extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = { 
@@ -68,4 +68,4 @@ class Project extends React.Component {
     }
 }
 
-export default Project;
+export default Project
