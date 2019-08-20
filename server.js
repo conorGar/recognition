@@ -25,8 +25,13 @@ app.use(logger('dev'))
 app.use(cors())
 
 
+app.get('/', async (req, res) => {
+	res.send('connected')
+})
 
-app.use('/projects', ProjectRouter)
+app.use('/project', ProjectRouter)
+
+
 app.use('/users', UserRouter)
 app.use('/app', appRouter)
 

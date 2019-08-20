@@ -38,13 +38,13 @@ ProjectRouter.post('/create/user/:id', async (request, response) => {
     if (!user) throw Error
     project.setUsers(user)
     const users = request.body.username.split(' ')
-    users.map(async element => {
+    users.map(async user => {
       let addedUser = await User.findOne({
         where: {
-          username: element
+          username: user
         }
       })
-      return project.addUser(addedUser)
+      project.addUser(addedUser)
     })
     response.json(project)
   } catch (e) {
