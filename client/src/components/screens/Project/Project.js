@@ -33,7 +33,6 @@ class Project extends React.Component {
     }
     
     render() {
-        // console.log(this.state.s) 
         const { title, image, description, users, skills } = this.state
         const skillz = skills.split(' ')
         return (
