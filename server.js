@@ -9,6 +9,7 @@ const AuthRouter = require('./routes/AuthRouter')
 
 require('dotenv').config()
 
+
 // Routing middleware
 const ProjectRouter = require('./routes/ProjectRouter')
 const UserRouter = require('./routes/UserRouter')
@@ -23,14 +24,18 @@ app.use('/auth', AuthRouter)
 app.use(logger('dev'))
 app.use(cors())
 
+
 app.get('/', async (req, res) => {
 	res.send('connected')
 })
 
 app.use('/project', ProjectRouter)
 
+
 app.use('/users', UserRouter)
 app.use('/app', appRouter)
+
+
 app.use(passport.initialize())
 
 app.get('/', async (req, res) => {
