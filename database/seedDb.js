@@ -2,13 +2,11 @@ const { User, Project } = require('./models')
 
 const main = async () => {
   try {
-    await User.destroy({
-      where: {}
-    })
+    // empty both tables
+    await User.destroy({ where: {} })
+    await Project.destroy({ where: {} })
 
-    await Project.destroy({
-      where: {}
-    })
+    //user seed
     const James = await User.create({
       name: 'James Kim',
       username: 'jkim3360',
@@ -37,32 +35,37 @@ const main = async () => {
       email: 'cgarity@gmail.com',
       password: 'password'
     })
+
+    //project seed
     const project1 = await Project.create({
       name: 'Project 1',
-      imgUrl: 'http://www.projectimg.com',
+      imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'blah blah',
-      skills: 'HTML CSS'
+      skills: 'HTML CSS',
+      link: 'somewebsite.com'
     })
     const project2 = await Project.create({
       name: 'Project 2',
-      imgUrl: 'http://www.project2img.com',
-      description: 'blah blah',
-      skills: 'Node.js Crud'
+      imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
+      skills: 'Node.js Crud',
+      link: 'somewebsite.com'
     })
     const project3 = await Project.create({
       name: 'Project 3',
-      imgUrl: 'http://www.project3img.com',
-      description: 'blah blah',
-      skills: 'React JS'
+      imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
+      skills: 'React JS',
+      link: 'somewebsite.com'
     })
     const project4 = await Project.create({
       name: 'Project 4',
-      imgUrl: 'http://www.project4img.com',
-      description: 'blah blah',
-      skills: ''
+      imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
+      skills: 'Crud',
+      link: 'somewebsite.com'
     })
 
-    // remember this stupid ass thing
     await project1.setUsers(James)
     await David.addProject(project1)
     await Justin.addProject(project1)
@@ -72,9 +75,6 @@ const main = async () => {
     await project3.setUsers(James)
     await David.addProject(project3)
     await Justin.addProject(project3)
-
-
-
 
   } catch (error) {
     throw error

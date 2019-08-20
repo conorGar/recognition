@@ -2,7 +2,7 @@ const express = require('express')
 const { User, Project } = require('../database/models')
 const UserRouter = express.Router()
 
-/********* GET -- localhost:PORT/restaurants *********/
+/********* GET -- localhost:PORT/ *********/
 UserRouter.get('/', async (request, response) => {
   try {
     const users = await User.findAll()
@@ -12,7 +12,7 @@ UserRouter.get('/', async (request, response) => {
   }
 })
 
-/********* GET -- localhost:PORT/restaurants/2 *********/
+/********* GET -- localhost:PORT/2 *********/
 UserRouter.get('/:id', async (request, response) => {
   try {
     const id = request.params.id
@@ -28,7 +28,7 @@ UserRouter.get('/:id', async (request, response) => {
   }
 })
 
-/********* CREATE -- localhost:PORT/restaurants *********/
+/********* CREATE -- localhost:PORT/ *********/
 UserRouter.post('/signup', async (request, response) => {
   try {
     const newUser = await User.create(request.body)
@@ -40,7 +40,7 @@ UserRouter.post('/signup', async (request, response) => {
   }
 })
 
-/********* UPDATE -- localhost:PORT/restaurants/2 *********/
+/********* UPDATE -- localhost:PORT/2 *********/
 UserRouter.put('/:id', async (request, response) => {
   try {
     const id = request.params.id
@@ -57,7 +57,7 @@ UserRouter.put('/:id', async (request, response) => {
   }
 })
 
-/********* DELETE -- localhost:PORT/restaurants/2 *********/
+/********* DELETE -- localhost:PORT/2 *********/
 UserRouter.delete('/:id', async (request, response) => {
   try {
     const id = request.params.id

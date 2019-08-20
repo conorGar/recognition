@@ -1,0 +1,49 @@
+#project-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: #7CD5B0;
+}
+
+.project-pic {
+    border-radius: 25px;
+    width: 60vw;
+    height: 30vw;
+    border: solid black 2px;
+    -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+.project-desc {
+    border-radius: 25px;
+    background: #3C8D94;
+    width: 60vw;
+    -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    margin: 15px;
+    padding: 10px;
+}
+
+.contribute {
+    border-radius: 25px;
+    width: 60vw;
+    background: #3C8D94;
+    border: solid black 2px;
+    -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    margin: 20px;
+}
+
+.project-title {
+    background: #3C8D94;
+    -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    border-radius: 25px;
+    margin: 15px;
+    padding: 10px;
+}

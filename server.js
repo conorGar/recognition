@@ -23,7 +23,12 @@ app.use('/auth', AuthRouter)
 app.use(logger('dev'))
 app.use(cors())
 
-app.use('/projects', ProjectRouter)
+app.get('/', async (req, res) => {
+	res.send('connected')
+})
+
+app.use('/project', ProjectRouter)
+
 app.use('/users', UserRouter)
 app.use('/app', appRouter)
 app.use(passport.initialize())
