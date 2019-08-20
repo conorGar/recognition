@@ -4,7 +4,7 @@ import Axios from 'axios';
 import {Link} from 'react-router-dom'
 import { async } from 'q';
 import ProjectIcon from '../../common/ProjectIcon/ProjectIcon';
-
+import {apiCall} from '../../../App'
 
 import './HomePage.css'
 
@@ -25,10 +25,11 @@ class HomePage extends React.Component {
 
 
     componentDidMount = async () => {
+        const allProjects = await apiCall.get('/project');
 
-        // const allProjects = await Axios.get('/home');
-        // console.log(allProjects);
-        // this.setState({projects: allProjects.data})
+        console.log(allProjects);
+
+        this.setState({projects: allProjects.data})
 
         this.setState({
             displayedProjects: this.state.projects
@@ -36,8 +37,12 @@ class HomePage extends React.Component {
 
        
 
+
+       
+
     }
 
+    //Activated in HompageHeader.js everytime something is typed into search bar
     search = async (filterValue) => {
              this.setState((prevState, props) => {
              const filteredProjects = this.state.projects.filter(project =>
