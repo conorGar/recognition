@@ -2,6 +2,7 @@ import React from 'react';
 import './HomepageHeader.css';
 import Searchbar from '../SearchBar/Searchbar'
 import CornerMenu from '../CornerMenu/CornerMenu'
+import FadingIconPic from '../FadingIconPic/FadingIconPic'
 
 class HomepageHeader extends React.Component{
 
@@ -38,7 +39,12 @@ class HomepageHeader extends React.Component{
                         <Searchbar  handleChange={this.handleFilterChange}/>
                     </div>
                     <div className="image-fader"></div>
-                    <div className="corner-triangle"></div>
+                    <div className="corner-triangle">
+                    <FadingIconPic />
+                    
+                    </div>
+                    
+                    
                    
                 </div>
             </div>
