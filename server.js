@@ -19,10 +19,10 @@ const PORT = process.env.PORT || 3001
 // Use Body Parser when tied to databses!!!!!
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use('/auth', AuthRouter)
 
 app.use(logger('dev'))
 app.use(cors())
+app.use('/auth', AuthRouter)
 
 
 app.get('/', async (req, res) => {

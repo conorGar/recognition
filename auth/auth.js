@@ -47,6 +47,7 @@ passport.use(
 
         const user = await User.create({
           name: name,
+          username: username,
           email: email,
           linkedin: linkedin,
           password: password
