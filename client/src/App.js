@@ -13,7 +13,7 @@ export default function App() {
     <div className="App">
       <nav>
       <Link to="/">Homepage</Link>
-      <Link to="/project">Project</Link>
+      <Link to="/project/2">Project</Link>
       </nav>
       <main>
         <Route 
@@ -21,7 +21,7 @@ export default function App() {
             component={HomePage}
             />
         <Route 
-            exact path="/project" 
+            exact path="/project/:id" 
             component={Project}
             />
       </main>
