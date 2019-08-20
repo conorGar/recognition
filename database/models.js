@@ -1,4 +1,5 @@
 const { Sequelize } = require('sequelize')
+const bcrypt = require('bcrypt')
 
 // connection to the database
 const db = new Sequelize({
@@ -9,7 +10,8 @@ const db = new Sequelize({
 // define models
 const User = db.define('user', {
   name: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    allowNull: false
   },
   username: {
     type: Sequelize.TEXT,
@@ -25,6 +27,10 @@ const User = db.define('user', {
     type: Sequelize.TEXT,
     allowNull: false,
     isUnique: true
+  },
+  password: {
+    type: Sequelize.TEXT,
+    allowNull: false
   }
 })
 
@@ -33,21 +39,33 @@ const Project = db.define('project', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  projectImgUrl: {
+  imgUrl: {
     type: Sequelize.STRING,
     defaultValue: 'Flatiron District',
     allowNull: false
-  }
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  skills: Sequelize.STRING
 })
 
+User.beforeCreate(async (user, options) => {
+  const hashedPassword = await bcrypt.hash(
+    user.password,
+    Number(process.env.SALT_ROUNDS)
+  )
+  user.password = hashedPassword
+})
 // define relationships
 
 User.belongsToMany(Project, {
-  through: 'project_user_xref',
+  through: 'project_user_xref'
 })
 
 Project.belongsToMany(User, {
-  through: 'project_user_xref',
+  through: 'project_user_xref'
 })
 
 module.exports = {
