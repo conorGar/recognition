@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const logger = require('morgan')
 
+
 // Routing middleware
 const ProjectRouter = require('./routes/ProjectRouter')
 const UserRouter = require('./routes/UserRouter')
@@ -17,10 +18,20 @@ app.use(logger('dev'))
 app.use(cors())
 
 app.get('/', async (req, res) => {
+	console.log("here")
 	res.send('connected')
 })
 
-app.use('/projects', ProjectRouter)
+
+app.get('/home', async (req, res) => {
+	console.log("here")
+	res.send('connected')
+})
+
+
+
+app.use('/', ProjectRouter)
+// app.use('/projects', ProjectRouter)
 app.use('/users', UserRouter)
 
 app.listen(PORT, () => console.log(`Server Started On Port ${PORT}`))
