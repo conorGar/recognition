@@ -12,7 +12,7 @@ export default function App() {
   return (
     <div className="App">
       <nav>
-      <Link to="/">Homepage</Link>
+      <Link to="/home">Homepage</Link>
       <Link to="/project/2">Project</Link>
       </nav>
       <main>
