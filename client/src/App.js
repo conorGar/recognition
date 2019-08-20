@@ -16,7 +16,6 @@ export default function App() {
       <nav>
         <Link to="/">Homepage</Link>
         <Link to="/project/2">Project</Link>
-        <Link to="/user/signup">Sign Up</Link>
         <Link to="/user/login">Login</Link>
       </nav>
       <main>

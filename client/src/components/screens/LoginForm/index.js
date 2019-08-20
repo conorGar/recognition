@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { apiCall } from '../../../App'
 class LoginForm extends React.Component {
   constructor(props) {
@@ -15,10 +16,10 @@ class LoginForm extends React.Component {
       const { data: { token } } = response
       localStorage.setItem('token', token)
       await this.props.history.push('/')
-  }
-  catch (error) {
+    }
+    catch (error) {
       throw error
-  }
+    }
   }
 
   handleSubmitForm = async (evt) => {
@@ -29,7 +30,7 @@ class LoginForm extends React.Component {
       await this.loginUser({ username, password })
     }
     catch (error) {
-      this.setState(prevState => {
+      this.setState(() => {
         return { showError: true }
       })
       throw error
@@ -52,13 +53,14 @@ class LoginForm extends React.Component {
     if (showError) {
       errMessage = (
         <div>
-          <span>an error occured please try again</span>
+          <span>Incorrect Username or Password</span>
         </div>
       )
     }
 
     return (
-      <div>
+      <Fragment>
+        <h2>Login</h2>
         {errMessage}
         <form className='form' onSubmit={this.handleSubmitForm}>
           <div>
@@ -81,7 +83,8 @@ class LoginForm extends React.Component {
           </div>
           <button>Login</button>
         </form>
-      </div>
+        <Link to='/user/signup'>create new account</Link>
+      </Fragment>
     )
   }
 }

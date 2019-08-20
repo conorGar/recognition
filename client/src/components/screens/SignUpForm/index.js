@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { apiCall } from '../../../App'
 import './SignUpForm.css'
 
@@ -29,7 +29,7 @@ class SignUpForm extends React.Component {
       await this.signUpNewUser({ name, username, password, email, linkedin })
     }
     catch (error) {
-      this.setState(prevState => {
+      this.setState(() => {
         return { showError: true }
       })
       throw error
@@ -57,8 +57,9 @@ class SignUpForm extends React.Component {
       )
     }
     return (
-      <form className='form' onSubmit={this.handleSubmitForm}>
+      <Fragment>
       {errMessage}
+      <form className='form' onSubmit={this.handleSubmitForm}>
         <div>
           <label htmlFor='name'>Name</label>
           <input
@@ -111,6 +112,7 @@ class SignUpForm extends React.Component {
         </div>
         <button>Sign Up</button>
       </form>
+      </Fragment>
     )
   }
 }
