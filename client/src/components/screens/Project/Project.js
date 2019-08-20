@@ -1,7 +1,8 @@
 import React from 'react'
 import './Project.css'
 import home3 from './images/home3.jpg'
-import Axios from "axios";
+import { apiCall } from '../../../App'
+
 
 class Project extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class Project extends React.Component {
 
     getName = async () => {
         // let id = this.props.match.params.id
-        let projectid = await Axios.get(`http://localhost:3001/project/1`)
+        let projectid = await apiCall.get(`/project/1`)
         this.setState({title: projectid.data.name})
     }
     

@@ -3,8 +3,12 @@ import './App.css';
 import { Route, Link } from 'react-router-dom'
 import  HomePage  from './components/screens/HomePage/HomePage'
 import  Project  from './components/screens/Project/Project'
+import Axios from 'axios'
 
-function App() {
+export const apiCall = Axios.create({ baseURL: "http://localhost:8001" })
+
+
+export default function App() {
   return (
     <div className="App">
       <nav>
@@ -25,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+
