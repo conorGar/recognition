@@ -1,6 +1,7 @@
 import React from 'react';
 import './HomepageHeader.css';
 import Searchbar from '../SearchBar/Searchbar'
+import CornerMenu from '../CornerMenu/CornerMenu'
 
 class HomepageHeader extends React.Component{
 
@@ -31,7 +32,14 @@ class HomepageHeader extends React.Component{
         return (
             <div className= 'header-container'>
                 <div className="background">
-                    <Searchbar  handleChange={this.handleFilterChange}/>
+                    <CornerMenu />
+                    <div className="search-container">
+                        <h2>Let Your Projects Speak For Themselves.</h2>
+                        <Searchbar  handleChange={this.handleFilterChange}/>
+                    </div>
+                    <div className="image-fader"></div>
+                    <div className="corner-triangle"></div>
+                   
                 </div>
             </div>
         )

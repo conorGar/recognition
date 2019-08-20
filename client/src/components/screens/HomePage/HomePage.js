@@ -6,6 +6,8 @@ import { async } from 'q';
 import ProjectIcon from '../../common/ProjectIcon/ProjectIcon';
 
 
+import './HomePage.css'
+
 class HomePage extends React.Component {
 
     constructor(props){
@@ -65,9 +67,10 @@ class HomePage extends React.Component {
 
         return (
             <div>
-                <h1>Home</h1>
                 <HomepageHeader search={this.search}/>
-                {this.createIcons()}
+                <div className="icons-container">
+                    {this.createIcons()}
+                </div>
             </div>
         )
     }
