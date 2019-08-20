@@ -10,26 +10,26 @@ const db = new Sequelize({
 // define models
 const User = db.define('user', {
   name: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false
   },
   username: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false,
-    isUnique: true
+    unique: true
   },
   linkedin: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false,
-    isUnique: true
+    unique: true
   },
   email: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false,
-    isUnique: true
+    unique: true
   },
   password: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false
   }
 })
