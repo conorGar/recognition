@@ -4,8 +4,11 @@ const ProjectRouter = express.Router()
 
 /********* GET -- localhost:PORT/ *********/
 ProjectRouter.get('/', async (request, response) => {
+
   try {
+    console.log("request")
     const projects = await Project.findAll()
+
     response.send(projects)
   } catch (e) {
     response.status(500).json({ msg: e.message })
