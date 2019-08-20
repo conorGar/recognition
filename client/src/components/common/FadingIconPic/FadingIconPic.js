@@ -12,13 +12,10 @@ function FadingIconPic(){
 
     return(
         <div className="fading-icon-container">
-            <img className="header-img" id="header-img1" src={MarioIcon}/>
-            <img className="header-img" id="header-img2" src={SunIcon}/>
-            <img className="header-img" id="header-img3" src={BeetleSteveIcon}/>
-            <img className="header-img" id="header-img4" src={NetflixIcon}/>
-
-
-
+            <div className="header-img" id="header-img1" ></div>
+            <div className="header-img" id="header-img2" ></div>
+            <div className="header-img" id="header-img3" ></div>
+            <div className="header-img" id="header-img4" ></div>
         </div>
     )
 }

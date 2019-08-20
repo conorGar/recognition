@@ -32,21 +32,21 @@ class HomepageHeader extends React.Component{
     render(){
         return (
             <div className= 'header-container'>
+
                 <div className="background">
-                    <CornerMenu />
+                    <div id="triangle-back"></div>
                     <div className="search-container">
-                        <h2>Let Your Projects Speak For Themselves.</h2>
+                        <h1>Let Your Projects Speak For Themselves.</h1>
                         <Searchbar  handleChange={this.handleFilterChange}/>
                     </div>
-                    <div className="image-fader"></div>
                     <div className="corner-triangle">
                     <FadingIconPic />
                     
                     </div>
-                    
-                    
                    
                 </div>
+                {/* <CornerMenu /> */}
+
             </div>
         )
     }
