@@ -1,15 +1,36 @@
 #project-container {
     display: flex;
     justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    /* background: #7CD5B0; */
+
+}
+
+.proj-left {
+    background: #7CD5B0;
+    height: 100vh;
+    width: 60vw;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    background: #7CD5B0;
+    z-index: 2;
+}
+
+.proj-right {
+    background: #3C8D94;
+    height: 100vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
 .project-pic {
     border-radius: 25px;
-    width: 60vw;
-    height: 30vw;
+    width: 59vw;
+    height: 32vw;
     border: solid black 2px;
     -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
@@ -19,23 +40,28 @@
 .project-desc {
     border-radius: 25px;
     background: #3C8D94;
-    width: 60vw;
     -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
     margin: 15px;
-    padding: 10px;
+    padding: 20px;
+    width: -webkit-fill-available;
+    font-size: 24px;
 }
 
 .contribute {
     border-radius: 25px;
     width: 60vw;
-    background: #3C8D94;
+    background: #7CD5B0;
     border: solid black 2px;
     -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
-    margin: 20px;
+    width: 39vw;
+    position: absolute;
+    bottom: 40px;
+    height: fix-content;
+
 }
 
 .project-title {
@@ -46,4 +72,35 @@
     border-radius: 25px;
     margin: 15px;
     padding: 10px;
+    width: -webkit-fill-available;
+}
+
+.list-item {
+    text-align: inherit;
+}
+
+.skilly {
+    background: #7CD5B0;
+    border-radius: 25px;
+    background: #7CD5B0;
+    border: solid black 2px;
+    -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    width: 39vw;
+    position: absolute;
+    font-size: 24px;
+    top: 64px;
+    height: 30vh;
+    padding: 0;
+}
+
+.skill-list {
+    height: 20px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-cred {
+    font-size: 14px;
 }

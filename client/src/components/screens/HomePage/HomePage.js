@@ -1,84 +1,93 @@
-import React from 'react';
-import HomepageHeader from '../../common/HomepageHeader/HomepageHeader';
-import Axios from 'axios';
-import {Link} from 'react-router-dom'
-import { async } from 'q';
-import ProjectIcon from '../../common/ProjectIcon/ProjectIcon';
-import {apiCall} from '../../../App'
+import React from 'react'
+import HomepageHeader from '../../common/HomepageHeader/HomepageHeader'
+import { apiCall } from '../../../App'
+import { Link } from 'react-router-dom'
+import { async } from 'q'
+import ProjectIcon from '../../common/ProjectIcon/ProjectIcon'
+import GeneralCard from '../../common/Card'
 
 import './HomePage.css'
 
 class HomePage extends React.Component {
+  constructor(props) {
+    super(props)
 
-    constructor(props){
-        super(props)
-
-        this.state = {
-            projects: [
-                {name:"blah", skills:"bloo"},
-                {name:"blah 2", skills:"broo"}
-            ],
-            displayedProjects: []
-            
-        }
+    this.state = {
+      displayedProjects: [],
+      projectImages: null
     }
+  }
 
+  componentDidMount = async () => {
+  
+    await this.fetchUserData()
+    await this.fetchProjectData()
+  }
 
-    componentDidMount = async () => {
-        const allProjects = await apiCall.get('/project');
+  fetchUserData = async () => {
+    await apiCall.get('/users').then(res => {
+      // console.log(res.data)
+    })
+  }
 
-        console.log(allProjects);
+  fetchProjectData = async () => {
+    const projects = await apiCall.get('/project')
+    const images = projects.data.map(element => {
+      return element.imgUrl
+    })
+    this.setState({
+      displayedProjects: projects.data,
+      projectImages: images
+    })
+  }
 
-        this.setState({projects: allProjects.data})
+  search = async filterValue => {
+    this.setState((prevState, props) => {
+      const filteredProjects = this.state.projects.filter(project =>
+        project.skills
+          .toLocaleLowerCase()
+          .includes(filterValue.toLocaleLowerCase())
+      )
 
-        this.setState({
-            displayedProjects: this.state.projects
-        })
+      return {
+        displayedProjects: filteredProjects
+      }
+    })
+  }
 
-       
-
-
-       
-
-    }
-
-    //Activated in HompageHeader.js everytime something is typed into search bar
-    search = async (filterValue) => {
-             this.setState((prevState, props) => {
-             const filteredProjects = this.state.projects.filter(project =>
-                project.skills.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase()));
-            
-    
-                return{
-                    displayedProjects:filteredProjects,
-                }
-        })
-    }
-
-    // Map through all the projects in the database and pass down needed data to the project icons 
-    createIcons =  () => {
-        const {displayedProjects} = this.state
-        console.log("PROJECTS:" +displayedProjects)
-         if(displayedProjects.length){ //if there are projects in the array...
-             return  displayedProjects.map((project) => {
-                 return <Link key={project.id} to={`/projects/${project.id}`}><ProjectIcon projectTitle={project.name}/></Link>
-             })
-
-         }  
-
-    }
-
-    render() {
-
+  // Map through all the projects in the database and pass down needed data to the project icons
+  createIcons = () => {
+    const { displayedProjects } = this.state
+    // console.log('PROJECTS:' + displayedProjects)
+    if (displayedProjects.length) {
+      //if there are projects in the array...
+      return displayedProjects.map(project => {
         return (
-            <div>
-                <HomepageHeader search={this.search}/>
-                <div className="icons-container">
-                    {this.createIcons()}
-                </div>
-            </div>
+          <GeneralCard
+            title={project.name}
+            image={project.imgUrl}
+            link={`/project/${project.id}`}
+          />
         )
+      })
     }
+  }
+
+  render() {
+    //   console.log(this.state.displayedProjects)
+    console.log(this.state.displayedProjects)
+    // console.log(this.state.projectImages)
+    console.log(this.state.projectImages)
+
+    return (
+      <div>
+        <HomepageHeader search={this.search} />
+        <div className="icons-container">{this.createIcons()}</div>
+
+        {/* <Card link="/project/2" /> */}
+      </div>
+    )
+  }
 }
 
-export default HomePage;
+export default HomePage
