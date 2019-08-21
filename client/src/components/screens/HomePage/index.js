@@ -1,6 +1,6 @@
 import React from 'react'
 import HomepageHeader from '../../HomepageHeader'
-import { apiCall } from '../../../App'
+import { apiCall } from '../../../services/apiService'
 import { Link } from 'react-router-dom'
 import { async } from 'q'
 import GeneralCard from '../../Card/index'
@@ -21,7 +21,6 @@ class HomePage extends React.Component {
   }
 
   componentDidMount = async () => {
-  
     await this.fetchUserData()
     await this.fetchProjectData()
   }
@@ -85,9 +84,10 @@ class HomePage extends React.Component {
 
   handleSuccessfulLogin = () => { //closes the login form if the user has logged in successfully
     if(this.state.showLoginForm === 'loginform-show'){
-        this.setState({
-            showLoginForm: 'loginform-hide'
-        })
+        this.props.handleLogin();
+        // this.setState({
+        //     showLoginForm: 'loginform-hide'
+        // })
     }
   }
 

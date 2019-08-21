@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { apiCall } from '../../../App'
+import { apiCall } from '../../../services/apiService'
 import './SignUpForm.css'
 
 class SignUpForm extends React.Component {
@@ -24,9 +24,9 @@ class SignUpForm extends React.Component {
     evt.preventDefault()
 
     const { name, username, password, email, linkedin } = this.state
-
+    const { handleSignUp } = this.props
     try {
-      await this.signUpNewUser({ name, username, password, email, linkedin })
+      await handleSignUp({ name, username, password, email, linkedin })
     }
     catch (error) {
       this.setState(() => {
@@ -34,6 +34,8 @@ class SignUpForm extends React.Component {
       })
       throw error
     }
+    await this.props.history.push('/')
+
   }
 
   handleTextInput = async (evt) => {
