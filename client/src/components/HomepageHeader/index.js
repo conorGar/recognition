@@ -5,7 +5,7 @@ import CornerMenu from '../CornerMenu'
 import FadingIconPic from '../FadingIconPic/'
 import Card from '../Card'
 import IntegrationDownshift from '../Autocomplete'
-import { apiCall } from '../../App'
+import { apiCall } from '../../services/apiService'
 
 class HomepageHeader extends React.Component {
   constructor(props) {
@@ -43,6 +43,11 @@ class HomepageHeader extends React.Component {
     this.props.search(this.state.value)
   }
 
+  handleLoginOpen = () =>{
+    this.props.loginHandler();
+}
+
+
   render() {
     const { names } = this.state
     // console.log(names)
@@ -56,7 +61,8 @@ class HomepageHeader extends React.Component {
             <IntegrationDownshift names={this.state.names} />
           </div>
           <div className="rightside-container">
-            {/* <CornerMenu /> */}
+
+            <CornerMenu loginHandler={this.handleLoginOpen}/>
 
             <div className="corner-icon">
               {/* <FadingIconPic /> */}

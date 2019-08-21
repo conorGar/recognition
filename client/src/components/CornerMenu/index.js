@@ -1,15 +1,27 @@
 import React from 'react';
+
 import './CornerMenu.css'
 
-function CornerMenu(){
+class CornerMenu extends React.Component{
+    constructor(props){
+        super(props)
+    }
 
-    return(
-        <div className="corner-menu-container">
-            <div className='login-container'>
-                 <span>LOGIN</span>
+    loginClick = (e) =>{
+        e.preventDefault();
+        console.log("login click happened")
+        this.props.loginHandler();
+    }
+
+    render(){
+        return(
+            <div className="corner-menu-container">
+                <div className='login-container'>
+                    <div className="login-button" onClick={this.loginClick}>LOGIN</div>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default CornerMenu
