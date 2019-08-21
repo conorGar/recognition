@@ -5,7 +5,9 @@ function CornerMenu(){
 
     return(
         <div className="corner-menu-container">
-            <span>LOGIN</span>
+            <div className='login-container'>
+                 <span>LOGIN</span>
+            </div>
         </div>
     )
 }

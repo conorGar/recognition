@@ -19,12 +19,7 @@ class HomePage extends React.Component {
   }
 
   componentDidMount = async () => {
-    // const allProjects = await Axios.get('/home');
-    // console.log(allProjects);
-    // this.setState({projects: allProjects.data})
-    // this.setState({
-    //   displayedProjects: this.state.projects
-    // })
+  
     await this.fetchUserData()
     await this.fetchProjectData()
   }
