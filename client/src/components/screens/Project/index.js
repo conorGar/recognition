@@ -1,9 +1,7 @@
 import React from 'react'
 import './Project.css'
 import { apiCall } from '../../../App'
-
 class Project extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = { 
@@ -14,11 +12,9 @@ class Project extends React.Component {
             users: []
         };
       }
-
     componentDidMount = () => {
           this.getName()       
     }
-
     getName = async () => {
         let id = this.props.match.params.id
         let projectid = await apiCall.get(`/project/${id}`)
@@ -40,10 +36,6 @@ class Project extends React.Component {
                 <div className="proj-left">
                     <h1 className="project-title">{title}</h1>
                     <img src={image} alt="ProjPic" className="project-pic"/>
-                    <p className="project-desc">{description}</p>
-                </div>
-                <div className="proj-right">
-                    <div className ='skilly'>
                         <ul className='skill-list'>
                             {skillz.map(skill => {
                                 return (
@@ -51,7 +43,9 @@ class Project extends React.Component {
                                 )
                             })}
                         </ul>
-                    </div>
+                </div>
+                <div className="proj-right">
+                    <p className="project-desc">{description}</p>
                     <div className='contribute'>
                         <h3>Contributors</h3>
                         {users.map(user => {
@@ -67,5 +61,4 @@ class Project extends React.Component {
         )
     }
 }
-
 export default Project
