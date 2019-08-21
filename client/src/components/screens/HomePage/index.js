@@ -3,8 +3,10 @@ import HomepageHeader from '../../HomepageHeader'
 import { apiCall } from '../../../App'
 import { Link } from 'react-router-dom'
 import { async } from 'q'
-import ProjectIcon from '../../ProjectIcon'
-import GeneralCard from '../../Card'
+import GeneralCard from '../../Card/index'
+import LoginForm from '../LoginForm/index'
+
+
 import './HomePage.css'
 
 class HomePage extends React.Component {
@@ -13,7 +15,8 @@ class HomePage extends React.Component {
 
     this.state = {
       displayedProjects: [],
-      projectImages: null
+      projectImages: null,
+      showLoginForm: 'loginform-hide'
     }
   }
 
@@ -72,14 +75,33 @@ class HomePage extends React.Component {
     }
   }
 
+  clickLoginOpen = () => {
+    if(this.state.showLoginForm === 'loginform-hide'){
+        this.setState({
+            showLoginForm: 'loginform-show'
+        })
+    }
+  }
+
+  handleSuccessfulLogin = () => { //closes the login form if the user has logged in successfully
+    if(this.state.showLoginForm === 'loginform-show'){
+        this.setState({
+            showLoginForm: 'loginform-hide'
+        })
+    }
+  }
+
+
   render() {
 
     return (
       <div>
-        <HomepageHeader search={this.search} />
+        <HomepageHeader search={this.search} loginHandler={this.clickLoginOpen}/>
         <div className="icons-container">{this.createIcons()}</div>
 
         {/* <Card link="/project/2" /> */}
+
+        <LoginForm currentClass={this.state.showLoginForm} loginCloseHandle={this.handleSuccessfulLogin}/>
       </div>
     )
   }

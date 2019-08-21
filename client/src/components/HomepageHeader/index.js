@@ -43,6 +43,11 @@ class HomepageHeader extends React.Component {
     this.props.search(this.state.value)
   }
 
+  handleLoginOpen = () =>{
+    this.props.loginHandler();
+}
+
+
   render() {
     const { names } = this.state
     // console.log(names)
@@ -56,7 +61,7 @@ class HomepageHeader extends React.Component {
             <IntegrationDownshift names={this.state.names} />
           </div>
           <div className="rightside-container">
-            <CornerMenu />
+            <CornerMenu loginHandler={this.handleLoginOpen}/>
 
             <div className="corner-icon">
               <FadingIconPic />
