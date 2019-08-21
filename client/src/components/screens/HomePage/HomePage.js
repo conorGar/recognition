@@ -76,13 +76,22 @@ class HomePage extends React.Component {
     }
   }
 
-  clickLogin = () => {
+  clickLoginOpen = () => {
     if(this.state.showLoginForm === 'loginform-hide'){
         this.setState({
             showLoginForm: 'loginform-show'
         })
     }
   }
+
+  handleSuccessfulLogin = () => { //closes the login form if the user has logged in successfully
+    if(this.state.showLoginForm === 'loginform-show'){
+        this.setState({
+            showLoginForm: 'loginform-hide'
+        })
+    }
+  }
+
 
   render() {
     //   console.log(this.state.displayedProjects)
@@ -92,12 +101,12 @@ class HomePage extends React.Component {
 
     return (
       <div>
-        <HomepageHeader search={this.search} loginHandler={this.clickLogin}/>
+        <HomepageHeader search={this.search} loginHandler={this.clickLoginOpen}/>
         <div className="icons-container">{this.createIcons()}</div>
 
         {/* <Card link="/project/2" /> */}
 
-        <LoginForm currentClass={this.state.showLoginForm} />
+        <LoginForm currentClass={this.state.showLoginForm} loginCloseHandle={this.handleSuccessfulLogin}/>
       </div>
     )
   }
