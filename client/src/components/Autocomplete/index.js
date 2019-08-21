@@ -19,15 +19,15 @@ const data = async () => {
   const response = await Axios.get('http://localhost:8001/users')
   let names = response.data.map(element => {
     const label = element.name
-    const obj = { label }
-    suggestions.push(obj)
+    // const obj = { label }
+    suggestions.push({ label })
   })
   console.log(suggestions)
   return names
 }
 data()
 
-// 
+//
 
 function renderInput(inputProps) {
   const { InputProps, classes, ref, ...other } = inputProps
@@ -148,9 +148,7 @@ function DownshiftMultiple(props) {
     setSelectedItem(newSelectedItem)
   }
 
-  return (
-    <div></div>
-  )
+  return <div />
 }
 
 DownshiftMultiple.propTypes = {
@@ -244,7 +242,7 @@ export default function IntegrationDownshift(props) {
       <div className={classes.divider} />
       <DownshiftMultiple classes={classes} />
       <div className={classes.divider} />
-    
+
       <div className={classes.divider} />
       <Downshift id="downshift-options">
         {({

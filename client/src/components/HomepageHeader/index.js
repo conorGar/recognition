@@ -1,11 +1,11 @@
 import React from 'react'
 import './HomepageHeader.css'
-import Searchbar from '../SearchBar/Searchbar'
-import CornerMenu from '../CornerMenu/CornerMenu'
-import FadingIconPic from '../FadingIconPic/FadingIconPic'
+import Searchbar from '../SearchBar'
+import CornerMenu from '../CornerMenu'
+import FadingIconPic from '../FadingIconPic/'
 import Card from '../Card'
 import IntegrationDownshift from '../Autocomplete'
-import { apiCall } from '../../../App'
+import { apiCall } from '../../App'
 
 class HomepageHeader extends React.Component {
   constructor(props) {
