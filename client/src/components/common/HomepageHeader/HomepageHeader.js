@@ -36,16 +36,19 @@ class HomepageHeader extends React.Component{
                 <div className="background">
                     <div id="triangle-back"></div>
                     <div className="search-container">
-                        <h1>Let Your Projects Speak For Themselves.</h1>
+                        <h1>Where Projects Speak For Themselves.</h1>
                         <Searchbar  handleChange={this.handleFilterChange}/>
                     </div>
-                    <div className="corner-triangle">
-                    <FadingIconPic />
-                    
+                    <div className="rightside-container">
+                        <CornerMenu />
+
+                        <div className="corner-icon">
+                        <FadingIconPic />
+                        </div>
+
                     </div>
                    
                 </div>
-                {/* <CornerMenu /> */}
 
             </div>
         )

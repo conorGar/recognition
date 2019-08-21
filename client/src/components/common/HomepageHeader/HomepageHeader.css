@@ -26,6 +26,9 @@
 -moz-box-shadow: 0px 0px 26px -4px rgba(0,0,0,0.65);
 box-shadow: 0px 0px 26px -4px rgba(0,0,0,0.65);
 
+
+
+
 }
 
 #triangle-back {
@@ -42,7 +45,13 @@ box-shadow: 0px 0px 26px -4px rgba(0,0,0,0.65);
   }
 
 
-.corner-triangle{
+.rightside-container{
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+.corner-icon{
     width: 70%;
     height: 60%;
     background-size: cover;
