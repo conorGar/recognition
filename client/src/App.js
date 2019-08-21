@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Route, Link } from 'react-router-dom'
-import HomePage from './components/screens/HomePage/HomePage'
-import Project from './components/screens/Project/Project'
+import HomePage from './components/screens/HomePage'
+import Project from './components/screens/Project'
 import SignUpForm from './components/screens/SignUpForm'
 import LoginForm from './components/screens/LoginForm';
 import Axios from 'axios'

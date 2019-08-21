@@ -1,10 +1,9 @@
 import React from 'react'
-import HomepageHeader from '../../common/HomepageHeader/HomepageHeader'
+import HomepageHeader from '../../HomepageHeader'
 import { apiCall } from '../../../App'
 import { Link } from 'react-router-dom'
 import { async } from 'q'
-import ProjectIcon from '../../common/ProjectIcon/ProjectIcon'
-import GeneralCard from '../../common/Card'
+import GeneralCard from '../../Card/index'
 import LoginForm from '../LoginForm/index'
 
 
@@ -94,10 +93,6 @@ class HomePage extends React.Component {
 
 
   render() {
-    //   console.log(this.state.displayedProjects)
-    console.log(this.state.displayedProjects)
-    // console.log(this.state.projectImages)
-    console.log(this.state.projectImages)
 
     return (
       <div>

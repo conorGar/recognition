@@ -1,11 +1,11 @@
 import React from 'react'
 
 
-import MarioIcon from '../../../assets/mario_icon.png'
-import BeetleSteveIcon from '../../../assets/icon_beetleSteve.png'
-import SunIcon from '../../../assets/icon_sun.png'
+import MarioIcon from '../../assets/mario_icon.png'
+import BeetleSteveIcon from '../../assets/icon_beetleSteve.png'
+import SunIcon from '../../assets/icon_sun.png'
 
-import NetflixIcon from '../../../assets/icon_netflix.png';
+import NetflixIcon from '../../assets/icon_netflix.png';
 import "./FadingIconPic.css"
 
 function FadingIconPic(){
