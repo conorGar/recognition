@@ -29,6 +29,11 @@ class HomepageHeader extends React.Component {
    
     }
 
+
+    handleLoginClick = () =>{
+        this.props.loginHandler();
+    }
+
     render(){
         return (
             <div className= 'header-container'>
@@ -40,7 +45,7 @@ class HomepageHeader extends React.Component {
                         <Searchbar  handleChange={this.handleFilterChange}/>
                     </div>
                     <div className="rightside-container">
-                        <CornerMenu />
+                        <CornerMenu loginHandler={this.handleLoginClick}/>
 
                         <div className="corner-icon">
                         <FadingIconPic />

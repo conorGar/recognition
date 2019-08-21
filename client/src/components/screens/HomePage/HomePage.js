@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { async } from 'q'
 import ProjectIcon from '../../common/ProjectIcon/ProjectIcon'
 import GeneralCard from '../../common/Card'
+import LoginForm from '../LoginForm/index'
+
 
 import './HomePage.css'
 
@@ -14,7 +16,8 @@ class HomePage extends React.Component {
 
     this.state = {
       displayedProjects: [],
-      projectImages: null
+      projectImages: null,
+      showLoginForm: 'loginform-hide'
     }
   }
 
@@ -73,6 +76,14 @@ class HomePage extends React.Component {
     }
   }
 
+  clickLogin = () => {
+    if(this.state.showLoginForm === 'loginform-hide'){
+        this.setState({
+            showLoginForm: 'loginform-show'
+        })
+    }
+  }
+
   render() {
     //   console.log(this.state.displayedProjects)
     console.log(this.state.displayedProjects)
@@ -81,10 +92,12 @@ class HomePage extends React.Component {
 
     return (
       <div>
-        <HomepageHeader search={this.search} />
+        <HomepageHeader search={this.search} loginHandler={this.clickLogin}/>
         <div className="icons-container">{this.createIcons()}</div>
 
         {/* <Card link="/project/2" /> */}
+
+        <LoginForm currentClass={this.state.showLoginForm} />
       </div>
     )
   }
