@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import './LoginForm.css'
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -9,8 +11,11 @@ class LoginForm extends React.Component {
     }
   }
 
+
   handleSubmitForm = async (evt) => {
     evt.preventDefault()
+
+    console.log("Login handle submit form activated")
     const { username, password } = this.state
     const { handleLogin } = this.props
 
@@ -48,7 +53,9 @@ class LoginForm extends React.Component {
     }
 
     return (
-      <Fragment>
+      <Fragment >
+        {/* Hey! Not too familiar with Fragments.... is having a div redundant? a container called 'loginform-hide' is necessary for login popup to show properly */}
+        <div className={this.props.currentClass}> {/*  class changed to determine whether the login popup displays or not...*/}
         <h2>Login</h2>
         {errMessage}
         <form className='form' onSubmit={this.handleSubmitForm}>
@@ -73,6 +80,10 @@ class LoginForm extends React.Component {
           <button>Login</button>
         </form>
         <Link to='/user/signup'>create new account</Link>
+        <div className="close-button" onClick={this.props.loginCloseHandle}>X</div>
+
+        </div>
+
       </Fragment>
     )
   }
