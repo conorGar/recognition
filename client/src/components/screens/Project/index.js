@@ -1,6 +1,6 @@
 import React from 'react'
 import './Project.css'
-import { apiCall } from '../../../App'
+import { apiCall } from '../../../services/apiService'
 class Project extends React.Component {
     constructor(props) {
         super(props);

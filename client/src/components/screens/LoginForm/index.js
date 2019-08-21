@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { apiCall } from '../../../App'
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -10,24 +9,13 @@ class LoginForm extends React.Component {
     }
   }
 
-  loginUser = async (data) => {
-    try {
-      const response = await apiCall.post('/auth/login', data)
-      const { data: { token } } = response
-      localStorage.setItem('token', token)
-      await this.props.history.push('/')
-    }
-    catch (error) {
-      throw error
-    }
-  }
-
   handleSubmitForm = async (evt) => {
     evt.preventDefault()
     const { username, password } = this.state
+    const { handleLogin } = this.props
 
     try {
-      await this.loginUser({ username, password })
+      await handleLogin({ username, password })
     }
     catch (error) {
       this.setState(() => {
@@ -35,6 +23,7 @@ class LoginForm extends React.Component {
       })
       throw error
     }
+    await this.props.history.push('/')
   }
 
   handleTextInput = async (evt) => {
@@ -69,7 +58,7 @@ class LoginForm extends React.Component {
               type='text'
               name='username'
               onChange={this.handleTextInput}
-              value={this.state.username}
+              defaultValue={this.state.username}
             />
           </div>
           <div>
@@ -78,7 +67,7 @@ class LoginForm extends React.Component {
               type='password'
               name='password'
               onChange={this.handleTextInput}
-              value={this.state.password}
+              defaultValue={this.state.password}
             />
           </div>
           <button>Login</button>
