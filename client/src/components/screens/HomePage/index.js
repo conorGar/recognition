@@ -1,10 +1,10 @@
 import React from 'react'
-import HomepageHeader from '../../common/HomepageHeader/HomepageHeader'
+import HomepageHeader from '../../HomepageHeader'
 import { apiCall } from '../../../App'
 import { Link } from 'react-router-dom'
 import { async } from 'q'
-import ProjectIcon from '../../common/ProjectIcon/ProjectIcon'
-import GeneralCard from '../../common/Card'
+import ProjectIcon from '../../ProjectIcon'
+import GeneralCard from '../../Card'
 import './HomePage.css'
 
 class HomePage extends React.Component {

@@ -18,22 +18,22 @@
 
 #header-img1{
     animation-delay: 12s;
-    background-image: url('../../../assets/icon_netflix.png')
+    background-image: url('../../assets/icon_netflix.png')
   
   }
   #header-img2{
     animation-delay: 8s;
-    background-image: url('../../../assets/icon_sun.png')
+    background-image: url('../../assets/icon_sun.png')
 
   }
   #header-img3{
     animation-delay: 4s;
-    background-image: url('../../../assets/icon_beetleSteve.png')
+    background-image: url('../../assets/icon_beetleSteve.png')
 
   }
   #header-img4{
     animation-delay: 0s;
-    background-image: url('../../../assets/mario_icon.png')
+    background-image: url('../../assets/mario_icon.png')
 
   }
   
