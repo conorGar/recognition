@@ -1,4 +1,15 @@
+.body {
+    display: flex;
+    justify-content: center;
+}
 
+.homepage-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 80vw;
+}
 
 .icons-container{
     display: flex;

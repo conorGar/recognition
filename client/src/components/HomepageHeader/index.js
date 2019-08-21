@@ -49,17 +49,17 @@ class HomepageHeader extends React.Component {
     return (
       <div className="header-container">
         <div className="background">
-          <div id="triangle-back" />
+          {/* <div id="triangle-back" /> */}
           <div className="search-container">
             <h1>Where Projects Speak For Themselves.</h1>
-            <Searchbar handleChange={this.handleFilterChange} />
+         
             <IntegrationDownshift names={this.state.names} />
           </div>
           <div className="rightside-container">
-            <CornerMenu />
+            {/* <CornerMenu /> */}
 
             <div className="corner-icon">
-              <FadingIconPic />
+              {/* <FadingIconPic /> */}
             </div>
           </div>
         </div>

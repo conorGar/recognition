@@ -2,10 +2,10 @@ import React from 'react'
 import HomepageHeader from '../../HomepageHeader'
 import { apiCall } from '../../../App'
 import { Link } from 'react-router-dom'
-import { async } from 'q'
 import ProjectIcon from '../../ProjectIcon'
 import GeneralCard from '../../Card'
 import './HomePage.css'
+import Container from '../../Container'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class HomePage extends React.Component {
   }
 
   componentDidMount = async () => {
-  
     await this.fetchUserData()
     await this.fetchProjectData()
   }
@@ -73,13 +72,14 @@ class HomePage extends React.Component {
   }
 
   render() {
-
     return (
-      <div>
-        <HomepageHeader search={this.search} />
-        <div className="icons-container">{this.createIcons()}</div>
+      <div className="body">
+        <Container classname="homepage-container">
+          <HomepageHeader search={this.search} />
+          <div className="icons-container">{this.createIcons()}</div>
 
-        {/* <Card link="/project/2" /> */}
+          {/* <Card link="/project/2" /> */}
+        </Container>
       </div>
     )
   }

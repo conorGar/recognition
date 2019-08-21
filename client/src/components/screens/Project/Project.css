@@ -1,8 +1,14 @@
+.body {
+    display: flex;
+    justify-content: center;
+}
+
 #project-container {
     display: flex;
     justify-content: center;
     flex-direction: row;
     align-items: center;
+    width: 80vw;
     /* background: #7CD5B0; */
 }
 .proj-left {
