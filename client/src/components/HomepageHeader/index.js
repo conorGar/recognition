@@ -5,7 +5,7 @@ import CornerMenu from '../CornerMenu'
 import FadingIconPic from '../FadingIconPic/'
 import Card from '../Card'
 import IntegrationDownshift from '../Autocomplete'
-import { apiCall } from '../../App'
+import { apiCall } from '../../services/apiService'
 
 class HomepageHeader extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import HomepageHeader from '../../HomepageHeader'
-import { apiCall } from '../../../App'
+import { apiCall } from '../../../services/apiService'
 import { Link } from 'react-router-dom'
 import { async } from 'q'
 import GeneralCard from '../../Card/index'
@@ -21,7 +21,6 @@ class HomePage extends React.Component {
   }
 
   componentDidMount = async () => {
-  
     await this.fetchUserData()
     await this.fetchProjectData()
   }
