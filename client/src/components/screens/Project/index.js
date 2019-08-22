@@ -1,6 +1,6 @@
 import React from 'react'
 import './Project.css'
-import { apiCall } from '../../../App'
+import { apiCall } from '../../../services/apiService'
 class Project extends React.Component {
     constructor(props) {
         super(props);
@@ -9,12 +9,41 @@ class Project extends React.Component {
             image: null,
             description: '',
             skills: '',
-            users: []
+            users: [],
+            checked: localStorage.getItem("theme") === "dark" ? true : false,
+            theme: localStorage.getItem("theme")
         };
       }
     componentDidMount = () => {
-          this.getName()       
+          this.getName()
+          document
+            .getElementsByTagName("HTML")[0]
+            .setAttribute("data-theme", localStorage.getItem("theme"));      
     }
+
+    toggleThemeChange = () => {
+        const { checked } = this.state;
+        if (checked === false) {
+          localStorage.setItem("theme", "dark");
+          document
+            .getElementsByTagName("HTML")[0]
+            .setAttribute("data-theme", localStorage.getItem("theme"));
+          this.setState({
+            checked: true
+          });
+        } else {
+          localStorage.setItem("theme", "light");
+          document
+            .getElementsByTagName("HTML")[0]
+            .setAttribute("data-theme", localStorage.getItem("theme"));
+          this.setState({
+            checked: false
+          });
+        }
+      }
+    
+      
+
     getName = async () => {
         let id = this.props.match.params.id
         let projectid = await apiCall.get(`/project/${id}`)
@@ -29,33 +58,88 @@ class Project extends React.Component {
     }
     
     render() {
-        const { title, image, description, users, skills } = this.state
+        const { title, image, description, users, skills, checked } = this.state
         const skillz = skills.split(' ')
         return (
-            <div id="project-container">
-                <div className="proj-left">
-                    <h1 className="project-title">{title}</h1>
-                    <img src={image} alt="ProjPic" className="project-pic"/>
-                        <ul className='skill-list'>
-                            {skillz.map(skill => {
-                                return (
-                                    <li key={skill} className='list-item'>{skill}</li>
-                                )
-                            })}
-                        </ul>
-                </div>
-                <div className="proj-right">
-                    <p className="project-desc">{description}</p>
-                    <div className='contribute'>
-                        <h3>Contributors</h3>
-                        {users.map(user => {
-                            return (
-                                <div key = {user.id}>
-                                    <h5 className='user-cred'><span>{user.name}<span> - </span><a href={user.linkedin}>{user.linkedin}</a></span></h5>
-                                </div>
-                            )
-                        })}
+            <div id="page-container">
+                <div className="header">
+                    {checked ? (
+                        <h1 className="project-title">{title}</h1>
+                    ) : (
+                        <h1 className="project-title2">{title}</h1>
+                    )}    
+                    <div className="switch-container">
+                        {checked ? (<p className="night-mode">Night Mode</p>):(<p className="night-mode2">Night Mode</p>)}
+                        <label class="switch">
+                            <input 
+                                type="checkbox" 
+                                defaultChecked={this.state.checked}
+                                onChange={() => this.toggleThemeChange()}
+                            />
+                            <span class="slider round" />
+                        </label>
                     </div>
+                </div>
+                <div className="proj-holder">
+                    {checked ? (
+                        <div className="proj-left">
+                            <img src={image} alt="ProjPic" className="project-pic"/>
+                            <ul className='skill-list'>
+                                {skillz.map(skill => {
+                                    return (
+                                        <li key={skill} className='list-item'>{skill}</li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    ) : (
+                        <div className="proj-left2">
+                            <img src={image} alt="ProjPic" className="project-pic"/>
+                            <ul className='skill-list'>
+                                {skillz.map(skill => {
+                                    return (
+                                        <li key={skill} className='list-item'>{skill}</li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    )}
+                    <div className="middy"/>
+                    { checked ? (
+                        <div className="proj-right">
+                            <div className="proj-desc">
+                                <h3>Description</h3>
+                                <p>{description}</p>
+                            </div>
+                            <div className='contribute'>
+                                <h3>Contributors</h3>
+                                {users.map(user => {
+                                    return (
+                                        <div key = {user.id}>
+                                            <h5 className='user-cred'>{user.name}</h5>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    ):(
+                        <div className="proj-right2">
+                            <div className="proj-desc">
+                                <h3>Description</h3>
+                                <p>{description}</p>
+                            </div>
+                            <div className='contribute'>
+                                <h3>Contributors</h3>
+                                {users.map(user => {
+                                    return (
+                                        <div key = {user.id}>
+                                            <h5 className='user-cred'>{user.name}</h5>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         )

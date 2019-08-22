@@ -1,11 +1,14 @@
 import React from 'react'
 import HomepageHeader from '../../HomepageHeader'
-import { apiCall } from '../../../App'
+import { apiCall } from '../../../services/apiService'
 import { Link } from 'react-router-dom'
 import { async } from 'q'
 import ProjectIcon from '../../ProjectIcon'
 import GeneralCard from '../../Card'
+import Container from '../../Container'
+
 import './HomePage.css'
+import LoginForm from '../LoginForm'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -18,7 +21,6 @@ class HomePage extends React.Component {
   }
 
   componentDidMount = async () => {
-  
     await this.fetchUserData()
     await this.fetchProjectData()
   }
@@ -62,7 +64,7 @@ class HomePage extends React.Component {
       //if there are projects in the array...
       return displayedProjects.map(project => {
         return (
-          <GeneralCard
+          <GeneralCard key={project.id}
             title={project.name}
             image={project.imgUrl}
             link={`/project/${project.id}`}
@@ -73,13 +75,24 @@ class HomePage extends React.Component {
   }
 
   render() {
-
+    const {isSignedIn} = this.props
     return (
-      <div>
-        <HomepageHeader search={this.search} />
-        <div className="icons-container">{this.createIcons()}</div>
+      <div className="body">
+        <Container classname="homepage-container">
+          <div className="icons-container" />
+        </Container>
+        <div>
+          <HomepageHeader
+            search={this.search}
+            loginHandler={this.clickLoginOpen}
+          />
 
-        {/* <Card link="/project/2" /> */}
+          {/* <LoginForm
+            currentClass={this.state.showLoginForm}
+            loginCloseHandle={this.handleSuccessfulLogin}
+          /> */}
+        </div>
+    <div className="icons-container">{this.createIcons()}</div>
       </div>
     )
   }

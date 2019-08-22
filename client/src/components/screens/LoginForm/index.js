@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { apiCall } from '../../../App'
+import { apiCall } from '../../../services/apiService'
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -10,26 +11,27 @@ class LoginForm extends React.Component {
     }
   }
 
-  loginUser = async (data) => {
-    try {
-      const response = await apiCall.post('/auth/login', data)
-      const { data: { token } } = response
-      localStorage.setItem('token', token)
-      await this.props.history.push('/')
-    }
-    catch (error) {
-      throw error
-    }
-  }
+  // loginUser = async data => {
+  //   try {
+  //     const response = await apiCall.post('/auth/login', data)
+  //     const {
+  //       data: { token }
+  //     } = response
+  //     await localStorage.setItem('token', token)
+  //     this.props.history.push('/')
+  //   } catch (error) {
+  //     throw error
+  //   }
+  // }
 
-  handleSubmitForm = async (evt) => {
+  handleSubmitForm = async evt => {
     evt.preventDefault()
     const { username, password } = this.state
-
+    const { handleLogin } = this.props
     try {
-      await this.loginUser({ username, password })
-    }
-    catch (error) {
+      await handleLogin({ username, password })
+      await this.props.history.push('/')
+    } catch (error) {
       this.setState(() => {
         return { showError: true }
       })
@@ -37,7 +39,7 @@ class LoginForm extends React.Component {
     }
   }
 
-  handleTextInput = async (evt) => {
+  handleTextInput = async evt => {
     const { name, value } = evt.target
 
     this.setState({
@@ -62,28 +64,28 @@ class LoginForm extends React.Component {
       <Fragment>
         <h2>Login</h2>
         {errMessage}
-        <form className='form' onSubmit={this.handleSubmitForm}>
+        <form className="form" onSubmit={this.handleSubmitForm}>
           <div>
-            <label htmlFor='username'>Username</label>
+            <label htmlFor="username">Username</label>
             <input
-              type='text'
-              name='username'
+              type="text"
+              name="username"
               onChange={this.handleTextInput}
               value={this.state.username}
             />
           </div>
           <div>
-            <label htmlFor='password'>Password</label>
+            <label htmlFor="password">Password</label>
             <input
-              type='password'
-              name='password'
+              type="password"
+              name="password"
               onChange={this.handleTextInput}
               value={this.state.password}
             />
           </div>
           <button>Login</button>
         </form>
-        <Link to='/user/signup'>create new account</Link>
+        <Link to="/user/signup">create new account</Link>
       </Fragment>
     )
   }

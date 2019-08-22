@@ -1,43 +1,123 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
 import { Route, Link } from 'react-router-dom'
 import HomePage from './components/screens/HomePage'
 import Project from './components/screens/Project'
 import SignUpForm from './components/screens/SignUpForm'
-import LoginForm from './components/screens/LoginForm';
-import Axios from 'axios'
+import LoginForm from './components/screens/LoginForm'
+import UserProfilePage from './components/screens/UserProfilePage'
+import { login, signUp, getProfile } from './services/apiService'
+import authService from './services/authService'
+import ProtectedRoute from './components/ProtectedRoute'
+import HideAppBar from './components/HideAppBar'
 
-export const apiCall = Axios.create({ baseURL: "http://localhost:8001" })
+export default class App extends React.Component {
+  state = {
+    user: {},
+    isSignedIn: false,
 
+  }
 
-export default function App() {
-  return (
-    <div className="App">
-      <nav>
-        <Link to="/">Homepage</Link>
-        <Link to="/project/2">Project</Link>
-        <Link to="/user/login">Login</Link>
-      </nav>
-      <main>
-        <Route
-          exact path="/"
-          component={HomePage}
-        />
-        <Route
-          exact path="/project/:id"
-          component={Project}
-        />
-        <Route 
-          path="/user/signup"
-          component={SignUpForm}
-        />
-        <Route 
-          path="/user/login"
-          component={LoginForm}
-        />
-      </main>
-    </div>
-      );
+  componentDidMount = async () => {
+    try {
+      const fetchUser = await getProfile()
+      this.setState(() => {
+        return {
+          isSignedIn: authService.isAuthenticated(),
+          user: fetchUser
+        }
+      })
+    } catch (error) {
+      throw error
     }
-    
-    
+  }
+
+  loginUser = async credentials => {
+    try {
+      const user = await login(credentials)
+      this.setState(state => {
+        return {
+          isSignedIn: true,
+          user: user
+        }
+      })
+    } catch (error) {
+      throw error
+    }
+  }
+
+  signUpUser = async credentials => {
+    try {
+      await signUp(credentials)
+      const newUser = await {
+        username: credentials.username,
+        password: credentials.password
+      }
+      this.loginUser(newUser)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  signOutUser = async () => {
+    authService.signOut()
+    await this.setState(state => {
+      return {
+        isSignedIn: false,
+        user: {}
+      }
+    })
+  }
+
+  render() {
+    const { isSignedIn, user } = this.state
+    return (
+      <div className="App">
+        <HideAppBar signOutUser={this.signOutUser} isSignedIn={isSignedIn} />
+        {/* <nav>
+          <Link to="/">Homepage</Link>
+          <Link to="/project/2">Project</Link>
+
+
+          {isSignedIn && (
+            <div>
+              <button onClick={this.signOutUser}>Signout</button>
+            </div>
+          )}
+          {!isSignedIn && <Link to="/user/login">Login</Link>}
+        </nav> */}
+        <main>
+          ​
+          <Route
+            exact
+            path="/"
+            render={props => <HomePage {...props} isSignedIn={isSignedIn} />}
+          />
+          <Route exact path="/project/:id" component={Project} />
+          <Route
+            path="/user/signup"
+            render={props => (
+              <SignUpForm {...props} handleSignUp={this.signUpUser} />
+            )}
+          />
+          <Route
+            path="/user/login"
+            render={props => (
+              <LoginForm {...props} handleLogin={this.loginUser} />
+            )}
+          />
+          <div>
+            <ProtectedRoute
+              path="/dashboard"
+              user={user}
+              component={HomePage}
+            />
+            ​{' '}
+          </div>
+          <Link to="/user/1">asdf</Link>
+          <Route exact path="/user/:id" component={UserProfilePage} />
+        </main>
+      </div>
+    )
+  }
+}
