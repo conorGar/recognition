@@ -60,11 +60,6 @@ export default function HideAppBar(props) {
                 Homepage
               </Link>
             </MaterialButton>
-            <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
-              <Link to="/project/2" className="links">
-                Project
-              </Link>
-            </MaterialButton>
 
             {!props.isSignedIn && (
               <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
