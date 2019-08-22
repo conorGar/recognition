@@ -41,7 +41,7 @@ ProjectRouter.post('/create/user/:id', async (request, response) => {
     const user = await User.findByPk(id)
     if (!user) throw Error
     project.setUsers(user)
-    const users = request.body.username.split(' ')
+    const users = request.body.username.split(', ')
     users.map(async user => {
       let addedUser = await User.findOne({
         where: {
@@ -62,7 +62,7 @@ ProjectRouter.put('/:id', async (request, response) => {
     const id = request.params.id
     const project = await Project.findByPk(id)
     if (!project) throw Error
-    const users = request.body.username.split(' ')
+    const users = request.body.username.split(', ')
     users.map(async element => {
       let addedUser = await User.findOne({
         where: {
