@@ -72,34 +72,32 @@ class LoginForm extends React.Component {
       <Fragment >
         {/* Hey! Not too familiar with Fragments.... is having a div redundant? a container called 'loginform-hide' is necessary for login popup to show properly */}
         <div className={this.props.currentClass}> {/*  class changed to determine whether the login popup displays or not...*/}
-        
-        <h2>Login</h2>
-        {errMessage}
-        <form className="form" onSubmit={this.handleSubmitForm}>
-          <div>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              name="username"
-              onChange={this.handleTextInput}
-              defaultValue={this.state.username}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={this.handleTextInput}
-              defaultValue={this.state.password}
-            />
-          </div>
-          <button className="login-button">Login</button>
-        </form>
-        <Link to="/user/signup">create new account</Link>
-        <div className="close-button" onClick={this.props.toggleLoginPopup}>X</div>
+            <h2>Login</h2>
+            {errMessage}
+            <form className="form" onSubmit={this.handleSubmitForm}>
+              <div>
+                <label htmlFor="username">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  onChange={this.handleTextInput}
+                  defaultValue={this.state.username}
+                />
+              </div>
+              <div>
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={this.handleTextInput}
+                  defaultValue={this.state.password}
+                />
+              </div>
+              <button className="login-button">Login</button>
+            </form>
+            <Link to="/user/signup">create new account</Link>
+            <div className="close-button" onClick={this.props.toggleLoginPopup}>X</div>
         </div>
-
       </Fragment>
     )
   }

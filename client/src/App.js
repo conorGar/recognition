@@ -12,6 +12,7 @@ import { login, signUp, getProfile } from './services/apiService'
 import authService from './services/authService'
 import ProtectedRoute from './components/ProtectedRoute'
 import HideAppBar from './components/HideAppBar'
+import ScreenFader from './components/common/ScreenFader/ScreenFader' //just used to fade screen during popups
 
 export default class App extends React.Component {
   state = {
@@ -146,6 +147,7 @@ export default class App extends React.Component {
           </div>
           <Link to="/user/1">asdf</Link>
           <Route exact path="/user/:id" component={UserProfilePage} />
+          <ScreenFader currentClass={this.state.showLoginForm} />
           <LoginForm handleLogin={this.loginUser} currentClass={this.state.showLoginForm} toggleLoginPopup={this.updateLoginPopup}/>
 
         </main>

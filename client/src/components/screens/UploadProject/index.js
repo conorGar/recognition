@@ -4,15 +4,10 @@ import S3FileUpload from 'react-s3';
 
 //Optional Import
 import { uploadFile } from 'react-s3';
+import {AwsConfig} from '../../../services/AwsConfig'
+
 
 import './UploadProject.css'
-const config = {
-    bucketName: 'myBucket',
-    dirName: 'photos', /* optional */
-    region: 'eu-west-1',
-    accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE', //replace when have key
-    secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE', //replace when have key
-}
 
 class UploadProject extends React.Component {
     constructor(props) {
@@ -33,17 +28,20 @@ class UploadProject extends React.Component {
 
 
 
-    //   handleImageUpload = async (evt) => {
-    //     evt.preventDefault()
+      handleImageUpload = async (evt) => {
+        evt.preventDefault()
 
-    //     S3FileUpload.uploadFile(evt.target.files[0], config)
-    //     .then((data) => {
-    //         console.log("Upload success at:" + data.location);
-    //     }).catch((err) =>{
-    //         alert(err);
-    //     })
-    //     // await this.props.history.push('/')
-    //   }
+        S3FileUpload.uploadFile(evt.target.files[0], AwsConfig)
+        .then((data) => {
+            this.setState({
+                imgUrl: data.location
+            })
+            console.log("Upload success at:" + data.location);
+        }).catch((err) =>{
+            alert(err);
+        })
+        // await this.props.history.push('/')
+      }
 
     handleProjectSubmit = async (e) => {
         e.preventDefault();
