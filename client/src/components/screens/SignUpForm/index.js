@@ -10,22 +10,15 @@ class SignUpForm extends React.Component {
     }
   }
 
-  signUpNewUser = async data => {
-    try {
-      await apiCall.post('/auth/signup', data)
-      await this.props.history.push('/')
-    } catch (error) {
-      throw error
-    }
-  }
-
   handleSubmitForm = async evt => {
     evt.preventDefault()
 
     const { name, username, password, email, linkedin } = this.state
+    const { handleSignUp } = this.props
 
     try {
-      await this.signUpNewUser({ name, username, password, email, linkedin })
+      await handleSignUp({ name, username, password, email, linkedin })
+      await this.props.history.push('/')
     } catch (error) {
       this.setState(() => {
         return { showError: true }
