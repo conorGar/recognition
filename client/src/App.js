@@ -6,7 +6,7 @@ import Project from './components/screens/Project'
 import SignUpForm from './components/screens/SignUpForm'
 import LoginForm from './components/screens/LoginForm';
 import UploadProject from './components/screens/UploadProject/index'
-
+import EditProject from './components/screens/EditProject/index'
 import { login, signUp, getProfile } from './services/apiService'
 import authService from './services/authService';
 import ProtectedRoute from './components/ProtectedRoute'
@@ -94,8 +94,11 @@ export default class App extends React.Component {
           }
           {
             isSignedIn &&
-            <Link to="/upload">Upload New Project</Link>
+            <Link to="/project/create/user/1">Upload New Project</Link>
           }
+            <Link to="/project/edit/1">Edit Project</Link>
+
+          
          
         </nav>
         <main>
@@ -131,8 +134,14 @@ export default class App extends React.Component {
           /> */}
 
           <Route
-            exact path="/upload"
+            exact path="/project/create/user/:id"
             component={UploadProject}
+
+          />
+
+          <Route
+            exact path="/project/edit/:id"
+            component={EditProject}
 
           />
           <ProtectedRoute
