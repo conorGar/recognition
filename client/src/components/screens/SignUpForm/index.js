@@ -15,18 +15,11 @@ class SignUpForm extends React.Component {
 
     const { name, username, password, email, linkedin } = this.state
     const { handleSignUp } = this.props
-<<<<<<< HEAD
-    try {
-      await handleSignUp({ name, username, password, email, linkedin })
-    }
-    catch (error) {
-=======
 
     try {
       await handleSignUp({ name, username, password, email, linkedin })
       await this.props.history.push('/')
     } catch (error) {
->>>>>>> 46b3036441a07532d27f31add079f4d9e25bb780
       this.setState(() => {
         return { showError: true }
       })

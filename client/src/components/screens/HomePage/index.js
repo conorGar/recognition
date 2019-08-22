@@ -96,15 +96,6 @@ class HomePage extends React.Component {
   render() {
     const {isSignedIn} = this.props
     return (
-<<<<<<< HEAD
-      <div>
-        <HomepageHeader search={this.search} loginHandler={this.clickLoginOpen}/>
-        <div className="icons-container">{this.createIcons()}</div>
-
-        {/* <Card link="/project/2" /> */}
-
-        <LoginForm currentClass={this.state.showLoginForm} loginCloseHandle={this.handleSuccessfulLogin}/>
-=======
       <div className="body">
         <Container classname="homepage-container">
           <div className="icons-container" />
@@ -120,8 +111,8 @@ class HomePage extends React.Component {
             loginCloseHandle={this.handleSuccessfulLogin}
           /> */}
         </div>
-    <div className="icons-container">{this.createIcons()}</div>
->>>>>>> 46b3036441a07532d27f31add079f4d9e25bb780
+       <div className="icons-container">{this.createIcons()}</div>
+
       </div>
     )
   }

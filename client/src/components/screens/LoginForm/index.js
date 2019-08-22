@@ -2,6 +2,9 @@ import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { apiCall } from '../../../services/apiService'
 
+import './LoginForm.css'
+
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -32,14 +35,16 @@ class LoginForm extends React.Component {
     const { handleLogin } = this.props
     try {
       await handleLogin({ username, password })
-      await this.props.history.push('/')
+      // await this.props.history.push('/')
+      this.props.toggleLoginPopup()
+
     } catch (error) {
       this.setState(() => {
         return { showError: true }
       })
       throw error
     }
-    await this.props.history.push('/')
+    // await this.props.history.push('/')
   }
 
   handleTextInput = async evt => {
@@ -67,6 +72,7 @@ class LoginForm extends React.Component {
       <Fragment >
         {/* Hey! Not too familiar with Fragments.... is having a div redundant? a container called 'loginform-hide' is necessary for login popup to show properly */}
         <div className={this.props.currentClass}> {/*  class changed to determine whether the login popup displays or not...*/}
+        
         <h2>Login</h2>
         {errMessage}
         <form className="form" onSubmit={this.handleSubmitForm}>
@@ -88,17 +94,12 @@ class LoginForm extends React.Component {
               defaultValue={this.state.password}
             />
           </div>
-          <button>Login</button>
+          <button className="login-button">Login</button>
         </form>
-<<<<<<< HEAD
-        <Link to='/user/signup'>create new account</Link>
-        <div className="close-button" onClick={this.props.loginCloseHandle}>X</div>
-
+        <Link to="/user/signup">create new account</Link>
+        <div className="close-button" onClick={this.props.toggleLoginPopup}>X</div>
         </div>
 
-=======
-        <Link to="/user/signup">create new account</Link>
->>>>>>> 46b3036441a07532d27f31add079f4d9e25bb780
       </Fragment>
     )
   }

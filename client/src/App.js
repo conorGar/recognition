@@ -17,6 +17,8 @@ export default class App extends React.Component {
   state = {
     user: {},
     isSignedIn: false,
+    showLoginForm: 'loginform-hide'
+
 
   }
 
@@ -71,11 +73,24 @@ export default class App extends React.Component {
     })
   }
 
+
+  updateLoginPopup = () =>{
+    if(this.state.showLoginForm === 'loginform-hide'){
+      this.setState({
+          showLoginForm: 'loginform-show'
+      })
+    }else{
+      this.setState({
+        showLoginForm: 'loginform-hide'
+    })
+    }
+  }
+
   render() {
     const { isSignedIn, user } = this.state
     return (
       <div className="App">
-        <HideAppBar signOutUser={this.signOutUser} isSignedIn={isSignedIn} />
+        <HideAppBar signOutUser={this.signOutUser} isSignedIn={isSignedIn} updatePopupStatus={this.updateLoginPopup}/>
         {/* <nav>
           <Link to="/">Homepage</Link>
           <Link to="/project/2">Project</Link>
@@ -93,7 +108,7 @@ export default class App extends React.Component {
           <Route
             exact
             path="/"
-            render={props => <HomePage {...props} isSignedIn={isSignedIn} />}
+            render={props => <HomePage {...props} isSignedIn={isSignedIn} /> }
           />
           <Route exact path="/project/:id" component={Project} />
           <Route
@@ -127,9 +142,12 @@ export default class App extends React.Component {
               component={HomePage}
             />
             ​{' '}
+            
           </div>
           <Link to="/user/1">asdf</Link>
           <Route exact path="/user/:id" component={UserProfilePage} />
+          <LoginForm handleLogin={this.loginUser} currentClass={this.state.showLoginForm} toggleLoginPopup={this.updateLoginPopup}/>
+
         </main>
       </div>
     )
