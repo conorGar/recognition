@@ -3,8 +3,8 @@ import { apiCall } from '../../../services/apiService'
 import S3FileUpload from 'react-s3';
 
 //Optional Import
-import { uploadFile } from 'react-s3';
-import {AwsConfig} from '../../../services/AwsConfig'
+// import { uploadFile } from 'react-s3';
+import { AwsConfig } from '../../../services/AwsConfig'
 
 
 import './UploadProject.css'
@@ -18,30 +18,23 @@ class UploadProject extends React.Component {
             name: '',
             description: '',
             skills: '',
-            imgUrl: 'randomgiberish',
+            imgUrl: '',
             link: 'fff',
-            username: 'jkim3360'
-
+            username: ''
         }
     }
+    handleImageUpload = async (evt) => {
 
-
-
-
-      handleImageUpload = async (evt) => {
-        evt.preventDefault()
-
-        S3FileUpload.uploadFile(evt.target.files[0], AwsConfig)
-        .then((data) => {
-            this.setState({
-                imgUrl: data.location
+        await S3FileUpload.uploadFile(evt.target.files[0], AwsConfig)
+            .then((data) => {
+                this.setState({
+                    imgUrl: data.location
+                })
+                console.log("Upload success at:" + data.location);
+            }).catch((err) => {
+                alert(err);
             })
-            console.log("Upload success at:" + data.location);
-        }).catch((err) =>{
-            alert(err);
-        })
-        // await this.props.history.push('/')
-      }
+    }
 
     handleProjectSubmit = async (e) => {
         e.preventDefault();
@@ -56,7 +49,6 @@ class UploadProject extends React.Component {
             throw error
         }
     }
-
 
     handleTextInput = async (evt) => {
         const { name, value } = evt.target
