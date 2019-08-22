@@ -1,72 +1,69 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
 import { Route, Link } from 'react-router-dom'
 import HomePage from './components/screens/HomePage'
 import Project from './components/screens/Project'
 import SignUpForm from './components/screens/SignUpForm'
-import LoginForm from './components/screens/LoginForm';
+import LoginForm from './components/screens/LoginForm'
 import UploadProject from './components/screens/UploadProject/index'
 import EditProject from './components/screens/EditProject/index'
+import UserProfilePage from './components/screens/UserProfilePage'
 import { login, signUp, getProfile } from './services/apiService'
-import authService from './services/authService';
+import authService from './services/authService'
 import ProtectedRoute from './components/ProtectedRoute'
-// import Axios from 'axios'
-
-// export const apiCall = Axios.create({ baseURL: "http://localhost:8001" })
-
+import HideAppBar from './components/HideAppBar'
 
 export default class App extends React.Component {
   state = {
     user: {},
-    isSignedIn: false
+    isSignedIn: false,
+
   }
 
   componentDidMount = async () => {
     try {
       const fetchUser = await getProfile()
-      this.setState(state => {
+      this.setState(() => {
         return {
           isSignedIn: authService.isAuthenticated(),
           user: fetchUser
         }
       })
-    }
-    catch (error) {
+    } catch (error) {
       throw error
     }
   }
 
-  loginUser = async (credentials) => {
+  loginUser = async credentials => {
     try {
       const user = await login(credentials)
-
       this.setState(state => {
         return {
           isSignedIn: true,
           user: user
         }
-      });
-    }
-    catch (error) {
+      })
+    } catch (error) {
       throw error
     }
   }
 
-  signUpUser = async (credentials) => {
+  signUpUser = async credentials => {
     try {
       await signUp(credentials)
-      const newUser = await { username: credentials.username, password: credentials.password }
+      const newUser = await {
+        username: credentials.username,
+        password: credentials.password
+      }
       this.loginUser(newUser)
-    }
-    catch (error) {
+    } catch (error) {
       throw error
     }
   }
 
-  signOutUser = () => {
+  signOutUser = async () => {
     authService.signOut()
-
-    this.setState(state => {
+    await this.setState(state => {
       return {
         isSignedIn: false,
         user: {}
@@ -78,60 +75,39 @@ export default class App extends React.Component {
     const { isSignedIn, user } = this.state
     return (
       <div className="App">
-        <nav>
+        <HideAppBar signOutUser={this.signOutUser} isSignedIn={isSignedIn} />
+        {/* <nav>
           <Link to="/">Homepage</Link>
           <Link to="/project/2">Project</Link>
-          {
-            isSignedIn && (
-              <div>
-                <button onClick={this.signOutUser}>Signout</button>
-              </div>
-            )
-          }
-          {
-            !isSignedIn &&
-            <Link to='/user/login'>Login</Link>
-          }
-          {
-            isSignedIn &&
-            <Link to="/project/create/user/1">Upload New Project</Link>
-          }
-            <Link to="/project/edit/1">Edit Project</Link>
 
-          
-         
-        </nav>
+
+          {isSignedIn && (
+            <div>
+              <button onClick={this.signOutUser}>Signout</button>
+            </div>
+          )}
+          {!isSignedIn && <Link to="/user/login">Login</Link>}
+        </nav> */}
         <main>
-
+          ​
           <Route
-            exact path="/"
-            render={(props) => <HomePage
-              {...props}
-              handleLogin={this.loginUser}
-              isSignedIn={isSignedIn}
-            />}
-            // component={HomePage}
+            exact
+            path="/"
+            render={props => <HomePage {...props} isSignedIn={isSignedIn} />}
           />
-          <Route
-            exact path="/project/:id"
-            component={Project}
-          />
+          <Route exact path="/project/:id" component={Project} />
           <Route
             path="/user/signup"
-            render={(props) => <SignUpForm
-              {...props}
-              handleSignUp={this.signUpUser}
-            />}
-            />
-          {/* <Route
+            render={props => (
+              <SignUpForm {...props} handleSignUp={this.signUpUser} />
+            )}
+          />
+          <Route
             path="/user/login"
-            render={(props) => <LoginForm
-              {...props}
-              handleLogin={this.loginUser}
-              isSignedIn={isSignedIn}
-            />}
-
-          /> */}
+            render={props => (
+              <LoginForm {...props} handleLogin={this.loginUser} />
+            )}
+          />
 
           <Route
             exact path="/project/create/user/:id"
@@ -144,16 +120,18 @@ export default class App extends React.Component {
             component={EditProject}
 
           />
-          <ProtectedRoute
-            path='/dashboard'
-          user={user}
-          component={HomePage}
-          />
-
+          <div>
+            <ProtectedRoute
+              path="/dashboard"
+              user={user}
+              component={HomePage}
+            />
+            ​{' '}
+          </div>
+          <Link to="/user/1">asdf</Link>
+          <Route exact path="/user/:id" component={UserProfilePage} />
         </main>
       </div>
-    );
+    )
   }
 }
-
-

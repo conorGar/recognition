@@ -6,6 +6,11 @@ import FadingIconPic from '../FadingIconPic/'
 import Card from '../Card'
 import IntegrationDownshift from '../Autocomplete'
 import { apiCall } from '../../services/apiService'
+<<<<<<< HEAD
+=======
+import Autocomplete from '../Autocomplete'
+import Container from '../Container'
+>>>>>>> 46b3036441a07532d27f31add079f4d9e25bb780
 
 class HomepageHeader extends React.Component {
   constructor(props) {
@@ -52,12 +57,13 @@ class HomepageHeader extends React.Component {
     const { names } = this.state
     // console.log(names)
     return (
-      <div className="header-container">
+      <Container className="body">
         <div className="background">
-          <div id="triangle-back" />
+          {/* <CornerMenu /> */}
           <div className="search-container">
-            <h1>Where Projects Speak For Themselves.</h1>
+            <h2>Let Your Projects Speak For Themselves.</h2>
             <Searchbar handleChange={this.handleFilterChange} />
+<<<<<<< HEAD
             <IntegrationDownshift names={this.state.names} />
           </div>
           <div className="rightside-container">
@@ -66,41 +72,18 @@ class HomepageHeader extends React.Component {
             <div className="corner-icon">
               <FadingIconPic />
             </div>
+=======
+            <Autocomplete />
+>>>>>>> 46b3036441a07532d27f31add079f4d9e25bb780
           </div>
+          <div className="image-fader" />
+          <div className="corner-triangle" />
         </div>
-      </div>
+      </Container>
     )
   }
 }
 
 
-//   handleFilterChange = event => {
-//     event.preventDefault()
-//     const filterValue = event.target.value
-
-//     this.setState({
-//       value: filterValue
-//     })
-
-//     this.props.search(this.state.value)
-//   }
-
-//   render() {
-//     return (
-//       <div className="header-container">
-//         <div className="background">
-//           <CornerMenu />
-//           <div className="search-container">
-//             <h2>Let Your Projects Speak For Themselves.</h2>
-//             <Searchbar handleChange={this.handleFilterChange} />
-//           </div>
-//           <div className="image-fader" />
-//           <div className="corner-triangle" />
-//         </div>
-//       </div>
-//     )
-//   }
-// }
 
 export default HomepageHeader
-

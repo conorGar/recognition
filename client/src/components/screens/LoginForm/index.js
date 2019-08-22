@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import './LoginForm.css'
+import { apiCall } from '../../../services/apiService'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -11,18 +11,29 @@ class LoginForm extends React.Component {
     }
   }
 
+  // loginUser = async data => {
+  //   try {
+  //     const response = await apiCall.post('/auth/login', data)
+  //     const {
+  //       data: { token }
+  //     } = response
+  //     await localStorage.setItem('token', token)
+  //     this.props.history.push('/')
+  //   } catch (error) {
+  //     throw error
+  //   }
+  // }
 
-  handleSubmitForm = async (evt) => {
+  handleSubmitForm = async evt => {
     evt.preventDefault()
 
     console.log("Login handle submit form activated")
     const { username, password } = this.state
     const { handleLogin } = this.props
-
     try {
       await handleLogin({ username, password })
-    }
-    catch (error) {
+      await this.props.history.push('/')
+    } catch (error) {
       this.setState(() => {
         return { showError: true }
       })
@@ -31,7 +42,7 @@ class LoginForm extends React.Component {
     await this.props.history.push('/')
   }
 
-  handleTextInput = async (evt) => {
+  handleTextInput = async evt => {
     const { name, value } = evt.target
 
     this.setState({
@@ -58,32 +69,36 @@ class LoginForm extends React.Component {
         <div className={this.props.currentClass}> {/*  class changed to determine whether the login popup displays or not...*/}
         <h2>Login</h2>
         {errMessage}
-        <form className='form' onSubmit={this.handleSubmitForm}>
+        <form className="form" onSubmit={this.handleSubmitForm}>
           <div>
-            <label htmlFor='username'>Username</label>
+            <label htmlFor="username">Username</label>
             <input
-              type='text'
-              name='username'
+              type="text"
+              name="username"
               onChange={this.handleTextInput}
               defaultValue={this.state.username}
             />
           </div>
           <div>
-            <label htmlFor='password'>Password</label>
+            <label htmlFor="password">Password</label>
             <input
-              type='password'
-              name='password'
+              type="password"
+              name="password"
               onChange={this.handleTextInput}
               defaultValue={this.state.password}
             />
           </div>
           <button>Login</button>
         </form>
+<<<<<<< HEAD
         <Link to='/user/signup'>create new account</Link>
         <div className="close-button" onClick={this.props.loginCloseHandle}>X</div>
 
         </div>
 
+=======
+        <Link to="/user/signup">create new account</Link>
+>>>>>>> 46b3036441a07532d27f31add079f4d9e25bb780
       </Fragment>
     )
   }

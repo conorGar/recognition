@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import deburr from 'lodash/deburr'
 import Downshift from 'downshift'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Popper from '@material-ui/core/Popper'
@@ -9,6 +10,10 @@ import Paper from '@material-ui/core/Paper'
 import MenuItem from '@material-ui/core/MenuItem'
 import Chip from '@material-ui/core/Chip'
 import Axios from 'axios'
+import MaterialButton from '@material-ui/core/Button'
+import Container from '../Container'
+import { ClickAwayListener } from '@material-ui/core'
+
 // npm install --save downshift
 // npm install @material-ui/core
 // npm install @material-ui/icons
@@ -22,18 +27,50 @@ const data = async () => {
     // const obj = { label }
     suggestions.push({ label })
   })
-  console.log(suggestions)
+  // console.log(suggestions)
   return names
 }
 data()
 
-//
+
+
+// get data from backend
+// get value of input
+// store inputted value in 
+
+// find value 
+let inputValue = ''
+
+function handleChange(event) {
+  console.log('clicking works')
+  const { value } = event.target
+  return inputValue = value
+}
+
+async function handleSubmit() {
+  const response = await Axios.get('http://localhost:8001/users')
+  const data = response.data
+  const inputValue = 'James Kim'
+  console.log(data)
+  const name = data.map(element => {
+    if (inputValue === element.name) return element.id
+  })
+  console.log(name[0])
+  // console.log(inputValue)
+}
+
+
+
+
+
+
 
 function renderInput(inputProps) {
   const { InputProps, classes, ref, ...other } = inputProps
 
   return (
     <TextField
+      onChange={handleChange}
       InputProps={{
         inputRef: ref,
         classes: {
@@ -119,34 +156,34 @@ function DownshiftMultiple(props) {
   const [inputValue, setInputValue] = React.useState('')
   const [selectedItem, setSelectedItem] = React.useState([])
 
-  function handleKeyDown(event) {
-    if (
-      selectedItem.length &&
-      !inputValue.length &&
-      event.key === 'Backspace'
-    ) {
-      setSelectedItem(selectedItem.slice(0, selectedItem.length - 1))
-    }
-  }
+  // function handleKeyDown(event) {
+  //   if (
+  //     selectedItem.length &&
+  //     !inputValue.length &&
+  //     event.key === 'Backspace'
+  //   ) {
+  //     setSelectedItem(selectedItem.slice(0, selectedItem.length - 1))
+  //   }
+  // }
 
-  function handleInputChange(event) {
-    setInputValue(event.target.value)
-  }
+  // function handleInputChange(event) {
+  //   setInputValue(event.target.value)
+  // }
 
-  function handleChange(item) {
-    let newSelectedItem = [...selectedItem]
-    if (newSelectedItem.indexOf(item) === -1) {
-      newSelectedItem = [...newSelectedItem, item]
-    }
-    setInputValue('')
-    setSelectedItem(newSelectedItem)
-  }
+  // function handleChange(item) {
+  //   let newSelectedItem = [...selectedItem]
+  //   if (newSelectedItem.indexOf(item) === -1) {
+  //     newSelectedItem = [...newSelectedItem, item]
+  //   }
+  //   setInputValue('')
+  //   setSelectedItem(newSelectedItem)
+  // }
 
-  const handleDelete = item => () => {
-    const newSelectedItem = [...selectedItem]
-    newSelectedItem.splice(newSelectedItem.indexOf(item), 1)
-    setSelectedItem(newSelectedItem)
-  }
+  // const handleDelete = item => () => {
+  //   const newSelectedItem = [...selectedItem]
+  //   newSelectedItem.splice(newSelectedItem.indexOf(item), 1)
+  //   setSelectedItem(newSelectedItem)
+  // }
 
   return <div />
 }
@@ -235,6 +272,13 @@ export default function IntegrationDownshift(props) {
                   </Paper>
                 ) : null}
               </div>
+              <MaterialButton
+                variant="contained"
+                onClick={handleSubmit}
+                style={{ margin: `${20}px` }}
+              >
+                Search
+              </MaterialButton>
             </div>
           )
         }}
