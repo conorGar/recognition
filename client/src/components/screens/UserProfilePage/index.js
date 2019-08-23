@@ -59,7 +59,14 @@ class UserProfilePage extends React.Component {
           <h1 className="prof-name">{name}</h1>
           <h2 className="prof-username">{username}</h2>
           <h3 className="prof-email">{email}</h3>
-          <h3 className="prof-linkedin">{linkedin}</h3>
+          <a href={`${linkedin}`}>
+            <h3 className="prof-linkedin">
+              Linked
+              <span>
+                <i class="fa fa-linkedin"></i>
+              </span>
+            </h3>
+          </a>
         </div>
         <Carousel className="user-project-list">
           {this.renderProjects()}
