@@ -99,6 +99,7 @@ class HomePage extends React.Component {
       return searchProjectResult.map(project => {
         return (
           <GeneralCard
+           
             key={project.id}
             title={project.name}
             image={project.imgUrl}

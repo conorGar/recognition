@@ -1,11 +1,10 @@
-
 .body {
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
-.homepage-container{
+.homepage-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,10 +12,10 @@
     width: 80vw;
 }
 
-.icons-container{
+.icons-container {
     display: flex;
     flex-flow: wrap;
     justify-content: space-evenly;
-    background-color: #cfffdb
+    width: 80vw;
+    background-color: #bec1c8
 }
-
