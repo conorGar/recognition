@@ -95,7 +95,8 @@ class LoginForm extends React.Component {
               </div>
               <button className="login-button">Login</button>
             </form>
-            <Link to="/user/signup">create new account</Link>
+            <div className="signup-button" onClick={this.props.toggleSignupPopup}>Create New Account</div>
+            {/* <Link to="/user/signup">create new account</Link> */}
             <div className="close-button" onClick={this.props.toggleLoginPopup}>X</div>
         </div>
       </Fragment>
