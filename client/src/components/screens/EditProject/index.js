@@ -1,10 +1,8 @@
 import React from 'react'
 import { apiCall } from '../../../services/apiService'
 import S3FileUpload from 'react-s3';
-import './EditPage.css'
 import { AwsConfig } from '../../../services/AwsConfig'
-
-
+import './EditPage.css'
 
 class EditProject extends React.Component {
     constructor(props) {
@@ -14,13 +12,12 @@ class EditProject extends React.Component {
             name: '',
             description: '',
             skills: '',
-            imgUrl: 'randomgiberish',
+            imgUrl: '',
             link: 'fff',
-            username: 'jkim3360'
+            username: ''
 
         }
     }
-
 
     //Fill the text forms with what is already in the project by default
     componentDidMount = async () => {
@@ -28,9 +25,6 @@ class EditProject extends React.Component {
         const thisProj = await apiCall.get(`project/${id}`)
         console.log("component did mount: update Ice Cream" + thisProj);
         const { name, description, skills } = thisProj.data;
-
-
-
         this.setState({
             name: name,
             description: description,
@@ -38,10 +32,7 @@ class EditProject extends React.Component {
         })
     }
 
-
-
     handleImageUpload = async (evt) => {
-
         await S3FileUpload.uploadFile(evt.target.files[0], AwsConfig)
             .then((data) => {
                 this.setState({
@@ -52,7 +43,6 @@ class EditProject extends React.Component {
                 alert(err);
             })
     }
-
 
     handleProjectSubmit = async (e) => {
         e.preventDefault();
@@ -68,7 +58,6 @@ class EditProject extends React.Component {
         }
     }
 
-
     handleTextInput = async (evt) => {
         const { name, value } = evt.target
 
@@ -77,19 +66,18 @@ class EditProject extends React.Component {
         })
     }
 
-
     render() {
         return (
             <div className="upload-project-container">
                 <h1>Edit Project</h1>
-
                 <div className="form-container">
-
-
                     <form className="project-submit-form" onSubmit={this.handleProjectSubmit}>
                         <div className="upload-image-container">
                             <h2>Drag Image Here</h2>
-                            <input name="uploadedImage" type="file" onChange={this.handleImageUpload}></input>
+                            <input name="uploadedImage"
+                                type="file"
+                                onChange={this.handleImageUpload}
+                            />
                         </div>
                         <div className="text-info-container">
                             <div className="input-title-container">
@@ -123,14 +111,11 @@ class EditProject extends React.Component {
                             </div>
                         </div>
                         <button className="submit-button">Submit</button>
-
                     </form>
-
                 </div>
             </div>
         )
     }
 }
-
 
 export default EditProject;

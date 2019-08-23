@@ -70,13 +70,13 @@ class Project extends React.Component {
                     )}    
                     <div className="switch-container">
                         {checked ? (<p className="night-mode">Night Mode</p>):(<p className="night-mode2">Night Mode</p>)}
-                        <label class="switch">
+                        <label className="switch">
                             <input 
                                 type="checkbox" 
                                 defaultChecked={this.state.checked}
                                 onChange={() => this.toggleThemeChange()}
                             />
-                            <span class="slider round" />
+                            <span className="slider round" />
                         </label>
                     </div>
                 </div>

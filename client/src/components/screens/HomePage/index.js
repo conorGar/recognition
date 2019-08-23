@@ -1,14 +1,11 @@
 import React from 'react'
 import HomepageHeader from '../../HomepageHeader'
 import { apiCall } from '../../../services/apiService'
-import { Link } from 'react-router-dom'
-import { async } from 'q'
-import ProjectIcon from '../../ProjectIcon'
+// import ProjectIcon from '../../ProjectIcon'
 import GeneralCard from '../../Card'
 import Container from '../../Container'
 
 import './HomePage.css'
-import LoginForm from '../LoginForm'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -28,7 +25,6 @@ class HomePage extends React.Component {
 
   fetchUserData = async () => {
     await apiCall.get('/users').then(res => {
-      // console.log(res.data)
     })
   }
 
@@ -60,7 +56,6 @@ class HomePage extends React.Component {
   // Map through all the projects in the database and pass down needed data to the project icons
   createIcons = () => {
     const { displayedProjects } = this.state
-    // console.log('PROJECTS:' + displayedProjects)
     if (displayedProjects.length) {
       //if there are projects in the array...
       return displayedProjects.map(project => {
@@ -86,15 +81,11 @@ class HomePage extends React.Component {
   handleSuccessfulLogin = () => { //closes the login form if the user has logged in successfully
     if(this.state.showLoginForm === 'loginform-show'){
         this.props.handleLogin();
-        // this.setState({
-        //     showLoginForm: 'loginform-hide'
-        // })
     }
   }
 
 
   render() {
-    const {isSignedIn} = this.props
     return (
       <div className="body">
         <Container classname="homepage-container">
@@ -105,11 +96,6 @@ class HomePage extends React.Component {
             search={this.search}
             loginHandler={this.clickLoginOpen}
           />
-
-          {/* <LoginForm
-            currentClass={this.state.showLoginForm}
-            loginCloseHandle={this.handleSuccessfulLogin}
-          /> */}
         </div>
        <div className="icons-container">{this.createIcons()}</div>
 

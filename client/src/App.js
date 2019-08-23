@@ -128,7 +128,6 @@ export default class App extends React.Component {
           <Route
             exact path="/project/create/user/:id"
             component={UploadProject}
-
           />
 
           <Route
@@ -138,7 +137,7 @@ export default class App extends React.Component {
           />
           <div>
             <ProtectedRoute
-              path="/dashboard"
+              path="/profile/:id"
               user={user}
               component={HomePage}
             />

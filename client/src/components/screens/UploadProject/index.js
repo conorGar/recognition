@@ -1,18 +1,13 @@
 import React from 'react'
 import { apiCall } from '../../../services/apiService'
 import S3FileUpload from 'react-s3';
-
-//Optional Import
-// import { uploadFile } from 'react-s3';
 import { AwsConfig } from '../../../services/AwsConfig'
-
 
 import './UploadProject.css'
 
 class UploadProject extends React.Component {
     constructor(props) {
         super(props);
-
 
         this.state = {
             name: '',
@@ -24,7 +19,6 @@ class UploadProject extends React.Component {
         }
     }
     handleImageUpload = async (evt) => {
-
         await S3FileUpload.uploadFile(evt.target.files[0], AwsConfig)
             .then((data) => {
                 this.setState({
@@ -52,25 +46,24 @@ class UploadProject extends React.Component {
 
     handleTextInput = async (evt) => {
         const { name, value } = evt.target
-
         this.setState({
             [name]: value
         })
     }
 
-
     render() {
         return (
             <div className="upload-project-container">
                 <h1>Upload New Project</h1>
-
                 <div className="form-container">
-
-
                     <form className="project-submit-form" onSubmit={this.handleProjectSubmit}>
                         <div className="upload-image-container">
                             <h2>Drag Image Here</h2>
-                            <input name="uploadedImage" type="file" onChange={this.handleImageUpload}></input>
+                            <input
+                                name="uploadedImage"
+                                type="file"
+                                onChange={this.handleImageUpload}
+                            />
                         </div>
                         <div className="text-info-container">
                             <div className="input-title-container">
@@ -104,14 +97,11 @@ class UploadProject extends React.Component {
                             </div>
                         </div>
                         <button className="submit-button">Submit</button>
-
                     </form>
-
                 </div>
             </div>
         )
     }
 }
-
 
 export default UploadProject;
