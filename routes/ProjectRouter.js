@@ -4,9 +4,8 @@ const ProjectRouter = express.Router()
 
 /********* GET -- localhost:PORT/ *********/
 ProjectRouter.get('/', async (request, response) => {
-
   try {
-    console.log("request")
+    console.log('request')
     const projects = await Project.findAll()
 
     response.send(projects)
@@ -28,8 +27,6 @@ ProjectRouter.get('/:id', async (request, response) => {
     response.status(404).json({ msg: e.message })
   }
 })
-
-
 
 /********* CREATE -- localhost:PORT/ *********/
 ProjectRouter.post('/create/user/:id', async (request, response) => {

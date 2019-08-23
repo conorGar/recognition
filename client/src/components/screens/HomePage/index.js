@@ -18,15 +18,15 @@ class HomePage extends React.Component {
       displayedProjects: [],
       projectImages: null,
       usernames: [],
-      searchResult: '',
-      returnSearchResult: false
+      searchProjectResult: '',
+      returnSearchResult: false,
+      searchSkill: []
     }
   }
 
   componentDidMount = async () => {
     await this.fetchUserData()
     await this.fetchProjectData()
-    // await this.fetchProjectIncludesUserData()
   }
 
   fetchUserData = async () => {
@@ -39,12 +39,16 @@ class HomePage extends React.Component {
 
   fetchProjectData = async () => {
     const projects = await apiCall.get('/project')
-    const images = projects.data.map(element => {
-      return element.imgUrl
+    const images = projects.data.map(project => {
+      return project.imgUrl
+    })
+    const skills = projects.data.map(project => {
+      return project.skills
     })
     this.setState({
       displayedProjects: projects.data,
-      projectImages: images
+      projectImages: images,
+      skills: skills
     })
   }
 
@@ -64,15 +68,38 @@ class HomePage extends React.Component {
   //   // }))
   // }
 
-  search = filterValue => {
-    const filteredProjects = this.state.displayedProjects.filter(project =>
-      project.name.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase())
+  search = async filterValue => {
+    const filteredProjects = await this.state.displayedProjects.filter(
+      project =>
+        project.name
+          .toLocaleLowerCase()
+          .includes(filterValue.toLocaleLowerCase())
+    )
+    const username = await this.state.usernames.filter(username =>
+      username.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase())
+    )
+    const skill = await this.state.skills.filter(skill =>
+      skill.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase())
     )
     this.setState({
-      searchResult: filteredProjects,
+      searchProjectResult: filteredProjects,
+      searchUsername: username,
+      searchSkill: skill,
       returnSearchResult: true
     })
   }
+
+  // findProjectSkill = async () => {
+  //   const { displayedProjects, searchSkill } = this.state
+  //   const projectOfSkill = displayedProjects.filter(project => {
+  //     ( searchSkill === project.skills) ? project : ''
+
+  //   })
+  //   console.log(projectOfSkill, displayedProjects[0].skills)
+  //   // if (this.state.searchSkill[0] === this.state.displayedProjects[0].skills) {
+  //   //    console.log('hello',  this.state.searchSkill)
+  //   // }
+  // }
 
   // Map through all the projects in the database and pass down needed data to the project icons
   createIcons = () => {
@@ -94,10 +121,25 @@ class HomePage extends React.Component {
   }
 
   renderSearchResult = () => {
-    const { searchResult } = this.state
-    if (searchResult.length) {
+    const { searchProjectResult, displayedProjects, searchSkill } = this.state
+    if (searchProjectResult.length) {
       //if there are projects in the array...
-      return searchResult.map(project => {
+      return searchProjectResult.map(project => {
+        return (
+          <GeneralCard
+            key={project.id}
+            title={project.name}
+            image={project.imgUrl}
+            link={`/project/${project.id}`}
+          />
+        )
+      })
+    } else if (searchSkill.length) {
+      const project = displayedProjects.filter(project => {
+        if (searchSkill[0] === project.skills) return project
+      })
+      console.log(project)
+      project.map(project => {
         return (
           <GeneralCard
             key={project.id}
@@ -111,9 +153,12 @@ class HomePage extends React.Component {
   }
 
   render() {
-    const { returnSearchResult } = this.state
+    const { returnSearchResult, searchSkill } = this.state
     // console.log(this.state.displayedProjects)
-    // console.log(this.state.usernames)
+    // console.log(this.state.searchSkill)
+    // console.log(this.state.searchProjectResult)
+    // console.log(this.state.searchUsername)
+
     return (
       <div className="body">
         <Container classname="homepage-container">
@@ -123,8 +168,18 @@ class HomePage extends React.Component {
           <HomepageHeader
             search={this.search}
             loginHandler={this.clickLoginOpen}
+            username={this.state.searchUsername}
+            fetchUserData={this.fetchUserData}
+            fetchProjectData={this.fetchProjectData}
           />
         </div>
+
+        {searchSkill == true ? (
+          <div className="icons-container">{this.renderSearchResult()}</div>
+        ) : (
+          ''
+        )}
+
         {returnSearchResult === true ? (
           <div className="icons-container">{this.renderSearchResult()}</div>
         ) : (

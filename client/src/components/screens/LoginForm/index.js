@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import MaterialButton from '@material-ui/core/Button'
+
 import { apiCall } from '../../../services/apiService'
 
 class LoginForm extends React.Component {
@@ -63,8 +65,21 @@ class LoginForm extends React.Component {
     return (
       <Fragment>
         <h2>Login</h2>
-        {errMessage}
-        <form className="form" onSubmit={this.handleSubmitForm}>
+        {showError ? (
+          <div
+            style={{
+              border: 'red 1px solid',
+              backgroundColor: '#FAE2E2',
+              padding: `${10}px`,
+              display: 'inline-table'
+            }}
+          >
+            {errMessage}
+          </div>
+        ) : (
+          ''
+        )}
+        <form className="form" >
           <div>
             <label htmlFor="username">Username</label>
             <input
@@ -83,9 +98,15 @@ class LoginForm extends React.Component {
               value={this.state.password}
             />
           </div>
-          <button>Login</button>
+          <MaterialButton
+                variant="contained"
+                onClick={this.handleSubmitForm}
+                style={{ margin: `${20}px` }}
+              >
+                Login
+              </MaterialButton>
         </form>
-        <Link to="/user/signup">create new account</Link>
+        <Link to="/user/signup">Create Account</Link>
       </Fragment>
     )
   }

@@ -13,6 +13,7 @@ import Axios from 'axios'
 import MaterialButton from '@material-ui/core/Button'
 import Container from '../Container'
 import { ClickAwayListener } from '@material-ui/core'
+require('../HomepageHeader/index')
 
 // npm install --save downshift
 // npm install @material-ui/core
@@ -31,7 +32,6 @@ const data = async () => {
   return names
 }
 data()
-
 
 
 // get data from backend

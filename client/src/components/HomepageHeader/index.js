@@ -8,6 +8,7 @@ import IntegrationDownshift from '../Autocomplete'
 import { apiCall } from '../../services/apiService'
 import Autocomplete from '../Autocomplete'
 import Container from '../Container'
+import MaterialButton from '@material-ui/core/Button'
 
 class HomepageHeader extends React.Component {
   constructor(props) {
@@ -34,32 +35,42 @@ class HomepageHeader extends React.Component {
     })
   }
 
-  handleFilterChange = event => {
+  handleChange = event => {
+    event.preventDefault()
+
     const filterValue = event.target.value
     this.setState({
       value: filterValue
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async event => {
     event.preventDefault()
-    this.props.search(this.state.value)
+    const value = event.target
+    await this.props.fetchUserData()
+    await this.props.fetchProjectData()
+    await this.props.search(this.state.value)
+    // console.log(this.props.username, value)
   }
 
   render() {
     const { names } = this.state
-    console.log(names)
     return (
       <Container className="body">
         <div className="background">
           {/* <CornerMenu /> */}
           <div className="search-container">
             <h2>Let Your Projects Speak For Themselves.</h2>
-            <form onClick={this.handleSubmit}>
-              <Searchbar handleChange={this.handleFilterChange} />
-              <button>Submit</button>
+            <form onSubmit={this.handleSubmit}>
+              <Searchbar placeholder='Search Project or Skill' handleChange={this.handleChange} />
+              <MaterialButton
+                onClick={this.handleSubmit}
+                variant="contained"
+                style={{ margin: `${20}px` }}
+              >
+                Search
+              </MaterialButton>{' '}
             </form>
-            <Autocomplete />
           </div>
           <div className="image-fader" />
           <div className="corner-triangle" />

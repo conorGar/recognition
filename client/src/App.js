@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Redirect } from 'react-router-dom'
 import HomePage from './components/screens/HomePage'
 import Project from './components/screens/Project'
 import SignUpForm from './components/screens/SignUpForm'
@@ -14,11 +14,10 @@ import HideAppBar from './components/HideAppBar'
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-  this.state = {
-    user: {},
-    isSignedIn: false,
-
-  }
+    this.state = {
+      user: {},
+      isSignedIn: false
+    }
   }
   componentDidMount = async () => {
     try {
@@ -69,6 +68,7 @@ export default class App extends React.Component {
         user: {}
       }
     })
+  
   }
 
   render() {
@@ -84,19 +84,20 @@ export default class App extends React.Component {
             path="/"
             render={props => <HomePage {...props} isSignedIn={isSignedIn} />}
           />
-          <Route exact path="/user/:id" component={UserProfilePage} />
-          <Route exact path="/project/:id" component={Project} />
           <Route
-            path="/user/signup"
-            render={props => (
-              <SignUpForm {...props} handleSignUp={this.signUpUser} />
-            )}
-          />
-          <Route
+            exact
             path="/user/login"
             render={props => (
               <LoginForm {...props} handleLogin={this.loginUser} />
             )}
+          />
+          <Route exact path="/project/:id" component={Project} />
+          <Route
+            exact
+            path="/user/signup"
+            render={props => (
+              <SignUpForm {...props} handleSignUp={this.signUpUser} />
+              )}
           />
           <div>
             <ProtectedRoute
@@ -107,8 +108,14 @@ export default class App extends React.Component {
             ​{' '}
           </div>
           {/* <Link to="/user/1">Profile Page</Link> */}
-
         </main>
+              <Route
+                exact
+                path="/user/:id"
+                render={props => (
+                  <UserProfilePage {...props} isSignedIn={isSignedIn} />
+                )}
+              />
       </div>
     )
   }
