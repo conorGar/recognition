@@ -52,22 +52,6 @@ class HomePage extends React.Component {
     })
   }
 
-  // fetchProjectIncludesUserData = async () => {
-  //   // const id = this.state.displayedProjects.length -1
-  //   const userData = await apiCall.get(`/users/`)
-  //   console.log(userData.data)
-  //   const projectsArr = await userData.data.map(element => element.projects)
-  //   // const projects = await projectsArr.map(element=>element)
-  //   console.log(projectsArr)
-  //   const usersProjects = await projectsArr.map((element,index) => element[index])
-  //   console.log(usersProjects)
-  //   // const usersProjects = projectsArr.map(element => element)
-  //   // console.log(usersProjects)
-  //   // this.setState(prevState => ({
-  //   //   usernames: usernames
-  //   // }))
-  // }
-
   search = async filterValue => {
     const filteredProjects = await this.state.displayedProjects.filter(
       project =>
@@ -154,8 +138,8 @@ class HomePage extends React.Component {
 
   render() {
     const { returnSearchResult, searchSkill } = this.state
-    // console.log(this.state.displayedProjects)
-    // console.log(this.state.searchSkill)
+    console.log(this.state.displayedProjects)
+    console.log(this.state.searchSkill)
     // console.log(this.state.searchProjectResult)
     // console.log(this.state.searchUsername)
 
