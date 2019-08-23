@@ -1,0 +1,39 @@
+
+
+.loginform-show-fader{
+
+    background-color: rgba(0,0,0,0.65);
+    width: 100vw;
+    height: 100vh;
+    display: inline;
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+
+}
+
+
+.loginform-hide-fader{
+    display: none;
+    position: fixed; /* Stay in place */
+
+    background-color: blue;
+}
+
+
+
+.signup-show-fader{
+    background-color: rgba(0,0,0,0.65);
+    width: 100vw;
+    height: 100vh;
+    display: inline;
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+
+}
+
+.signup-hide-fader{
+    display: none;
+    position: fixed; /* Stay in place */
+}

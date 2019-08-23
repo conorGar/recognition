@@ -46,6 +46,11 @@ class HomepageHeader extends React.Component {
     this.props.search(this.state.value)
   }
 
+  handleLoginOpen = () =>{
+    this.props.loginHandler();
+}
+
+
   render() {
     const { names } = this.state
     console.log(names)
@@ -59,6 +64,7 @@ class HomepageHeader extends React.Component {
               <Searchbar handleChange={this.handleFilterChange} />
               <button>Submit</button>
             </form>
+
             <Autocomplete />
           </div>
           <div className="image-fader" />

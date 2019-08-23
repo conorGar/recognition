@@ -35,7 +35,8 @@ HideOnScroll.propTypes = {
   window: PropTypes.func
 }
 
-export default function HideAppBar(props) {
+
+/*export default function HideAppBar(props) {
   return (
     <React.Fragment>
       <CssBaseline />
@@ -46,23 +47,56 @@ export default function HideAppBar(props) {
             background: '#333333'
           }}
         >
-          <Toolbar
+          <Toolbar */
+
+
+
+
+class HideAppBar extends React.Component {
+  constructor(props){
+    super(props)
+
+  }
+
+
+
+  handleLoginClick = (e) =>{
+      e.preventDefault();
+      console.log(this.props);
+      this.props.updatePopupStatus();
+  }
+
+  render(){
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <HideOnScroll {...this.props}>
+          <AppBar
             style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-end'
+              justifyContent: 'space-between',
+              background: '#333333'
             }}
           >
-            <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
+
+           <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
               <Link to="/" className="links">
                 Homepage
               </Link>
             </MaterialButton>
 
             {!props.isSignedIn && (
+
+            <Toolbar
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'flex-end'
+              }}
+            >
+
               <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
-                <Link to="/user/login" className="links">
-                  Login
+                <Link to="/" className="links">
+                  Homepage
                 </Link>
               </MaterialButton>
             )}
@@ -82,12 +116,35 @@ export default function HideAppBar(props) {
                 style={{ margin: `${20}px` }}
               >
                 Sign Out
+
               </MaterialButton>
-            )}
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
-      <Toolbar />
-    </React.Fragment>
-  )
+
+              {!this.props.isSignedIn && (
+                <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
+                  <div className="links" onClick={this.handleLoginClick}>
+                    Login
+                  </div>
+                </MaterialButton>
+              )}
+
+              {this.props.isSignedIn && (
+                <MaterialButton
+                  onClick={this.props.signOutUser}
+                  variant="contained"
+                  style={{ margin: `${20}px` }}
+                >
+                  Sign Out
+                </MaterialButton>
+              )}
+            </Toolbar>
+          </AppBar>
+        </HideOnScroll>
+        <Toolbar />
+      </React.Fragment>
+    )
+  }
 }
+
+
+
+export default HideAppBar
