@@ -35,26 +35,30 @@ class HomepageHeader extends React.Component {
   }
 
   handleFilterChange = event => {
-    event.preventDefault()
     const filterValue = event.target.value
-
     this.setState({
       value: filterValue
     })
+  }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
     this.props.search(this.state.value)
   }
 
   render() {
     const { names } = this.state
-    // console.log(names)
+    console.log(names)
     return (
       <Container className="body">
         <div className="background">
           {/* <CornerMenu /> */}
           <div className="search-container">
             <h2>Let Your Projects Speak For Themselves.</h2>
-            <Searchbar handleChange={this.handleFilterChange} />
+            <form onClick={this.handleSubmit}>
+              <Searchbar handleChange={this.handleFilterChange} />
+              <button>Submit</button>
+            </form>
             <Autocomplete />
           </div>
           <div className="image-fader" />
@@ -64,7 +68,5 @@ class HomepageHeader extends React.Component {
     )
   }
 }
-
-
 
 export default HomepageHeader

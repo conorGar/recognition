@@ -12,12 +12,14 @@ import ProtectedRoute from './components/ProtectedRoute'
 import HideAppBar from './components/HideAppBar'
 
 export default class App extends React.Component {
-  state = {
+  constructor(props) {
+    super(props)
+  this.state = {
     user: {},
     isSignedIn: false,
 
   }
-
+  }
   componentDidMount = async () => {
     try {
       const fetchUser = await getProfile()
@@ -74,18 +76,7 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <HideAppBar signOutUser={this.signOutUser} isSignedIn={isSignedIn} />
-        {/* <nav>
-          <Link to="/">Homepage</Link>
-          <Link to="/project/2">Project</Link>
 
-
-          {isSignedIn && (
-            <div>
-              <button onClick={this.signOutUser}>Signout</button>
-            </div>
-          )}
-          {!isSignedIn && <Link to="/user/login">Login</Link>}
-        </nav> */}
         <main>
           ​
           <Route
@@ -93,6 +84,7 @@ export default class App extends React.Component {
             path="/"
             render={props => <HomePage {...props} isSignedIn={isSignedIn} />}
           />
+          <Route exact path="/user/:id" component={UserProfilePage} />
           <Route exact path="/project/:id" component={Project} />
           <Route
             path="/user/signup"
@@ -114,8 +106,8 @@ export default class App extends React.Component {
             />
             ​{' '}
           </div>
-          <Link to="/user/1">asdf</Link>
-          <Route exact path="/user/:id" component={UserProfilePage} />
+          {/* <Link to="/user/1">Profile Page</Link> */}
+
         </main>
       </div>
     )

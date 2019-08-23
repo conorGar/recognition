@@ -12,7 +12,6 @@ import Container from '@material-ui/core/Container'
 import Slide from '@material-ui/core/Slide'
 import './HideAppBar.css'
 
-
 function HideOnScroll(props) {
   const { children, window } = props
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -35,7 +34,6 @@ HideOnScroll.propTypes = {
    */
   window: PropTypes.func
 }
-
 
 export default function HideAppBar(props) {
   return (
@@ -65,6 +63,14 @@ export default function HideAppBar(props) {
               <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
                 <Link to="/user/login" className="links">
                   Login
+                </Link>
+              </MaterialButton>
+            )}
+
+            {props.isSignedIn && (
+              <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
+                <Link to="/user/1" className="links">
+                  Profile Page
                 </Link>
               </MaterialButton>
             )}
