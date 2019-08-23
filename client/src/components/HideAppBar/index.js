@@ -36,19 +36,17 @@ HideOnScroll.propTypes = {
 }
 
 class HideAppBar extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-
   }
 
-
-  handleLoginClick = (e) =>{
-    e.preventDefault();
-    console.log(this.props);
-    this.props.updatePopupStatus();
+  handleLoginClick = e => {
+    e.preventDefault()
+    console.log(this.props)
+    this.props.updatePopupStatus()
   }
 
-  render(){
+  render() {
     return (
       <React.Fragment>
         <CssBaseline />
@@ -69,17 +67,20 @@ class HideAppBar extends React.Component {
               }}
             >
               <Link to="/" className="links">
-                <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
+                <MaterialButton
+                  variant="contained"
+                  style={{ margin: `${20}px` }}
+                >
                   Homepage
                 </MaterialButton>
               </Link>
 
               {!this.props.isSignedIn && (
                 <Link to="/user/login" className="links">
-                  <MaterialButton onClick={this.handleLoginClick}
+                  <MaterialButton
+                    onClick={this.handleLoginClick}
                     variant="contained"
-                    style={{ margin: `${20}px` }
-                    }
+                    style={{ margin: `${20}px` }}
                   >
                     Login
                   </MaterialButton>
@@ -102,15 +103,20 @@ class HideAppBar extends React.Component {
                   </MaterialButton>
                 </Link>
               )}
+              
 
               {this.props.isSignedIn && (
+                <Link
+                to={'/'}
+                className="links"
+              >
                 <MaterialButton
                   onClick={this.props.signOutUser}
                   variant="contained"
                   style={{ margin: `${20}px` }}
                 >
                   Sign Out
-                </MaterialButton>
+                </MaterialButton></Link>
               )}
             </Toolbar>
           </AppBar>
@@ -121,5 +127,4 @@ class HideAppBar extends React.Component {
   }
 }
 
-
-export default HideAppBar;
+export default HideAppBar

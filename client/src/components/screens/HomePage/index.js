@@ -1,9 +1,9 @@
 import React from 'react'
 import HomepageHeader from '../../HomepageHeader'
-import { apiCall } from '../../../services/apiService'
 import GeneralCard from '../../Card'
 import Container from '../../Container'
 import './HomePage.css'
+import { apiCall } from '../../../services/apiService'
 
 class HomePage extends React.Component {
   constructor(props) {

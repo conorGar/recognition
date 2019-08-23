@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
-import { apiCall } from '../../../services/apiService'
+import { Redirect } from 'react-router-dom'
 import './SignUpForm.css'
+import { apiCall } from '../../../services/apiService'
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -49,6 +50,9 @@ class SignUpForm extends React.Component {
         </div>
       )
     }
+
+    if (this.props.isSignedIn) {return <Redirect to={`/dashboard/${localStorage.getItem('userId')}`} />}
+
     return (
      
       <Fragment>

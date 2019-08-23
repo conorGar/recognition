@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import MaterialButton from '@material-ui/core/Button'
 
 import { apiCall } from '../../../services/apiService'
 
-import './LoginForm.css';
+import './LoginForm.css'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -36,7 +36,6 @@ class LoginForm extends React.Component {
       await handleLogin({ username, password })
       // await this.props.history.push(`/dashboard/${localStorage.getItem('userId')}`)
       this.props.toggleLoginPopup()
-
     } catch (error) {
       this.setState(() => {
         return { showError: true }
@@ -65,11 +64,15 @@ class LoginForm extends React.Component {
         </div>
       )
     }
+    if (this.props.isSignedIn) {return <Redirect to={`/dashboard/${localStorage.getItem('userId')}`} />}
+
 
     return (
-      <Fragment >
-      {/* Hey! Not too familiar with Fragments.... is having a div redundant? a container called 'loginform-hide' is necessary for login popup to show properly */}
-      <div className={this.props.currentClass}> {/*  class changed to determine whether the login popup displays or not...*/}
+      <Fragment>
+        {/* Hey! Not too familiar with Fragments.... is having a div redundant? a container called 'loginform-hide' is necessary for login popup to show properly */}
+        <div className={this.props.currentClass}>
+          {' '}
+          {/*  class changed to determine whether the login popup displays or not...*/}
           <h2>Login</h2>
           {errMessage}
           <form className="form" onSubmit={this.handleSubmitForm}>
@@ -93,11 +96,15 @@ class LoginForm extends React.Component {
             </div>
             <button className="login-button">Login</button>
           </form>
-          <div className="signup-button" onClick={this.props.toggleSignupPopup}>Create New Account</div>
+          <div className="signup-button" onClick={this.props.toggleSignupPopup}>
+            Create New Account
+          </div>
           {/* <Link to="/user/signup">create new account</Link> */}
-          <div className="close-button" onClick={this.props.toggleLoginPopup}>X</div>
-      </div>
-    </Fragment>
+          <div className="close-button" onClick={this.props.toggleLoginPopup}>
+            X
+          </div>
+        </div>
+      </Fragment>
     )
   }
 }

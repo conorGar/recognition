@@ -138,10 +138,13 @@ export default class App extends React.Component {
             currentClass={this.state.showLoginForm}
             toggleLoginPopup={this.updateLoginPopup}
             toggleSignupPopup={this.updateSignupPopup}
+            isSignedIn={isSignedIn}
           />
           <SignUpForm
+            handleSignUp={this.signUpUser}
             currentClass={this.state.showSignupForm}
             toggleSignupPopup={this.updateSignupPopup}
+            isSignedIn={isSignedIn}
           />
         </main>
         <Route
