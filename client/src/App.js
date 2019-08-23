@@ -18,8 +18,8 @@ export default class App extends React.Component {
   state = {
     user: {},
     isSignedIn: false,
-    showLoginForm: 'loginform-hide'
-
+    showLoginForm: 'loginform-hide',
+    showSignupForm: 'signup-hide'
 
   }
 
@@ -87,6 +87,21 @@ export default class App extends React.Component {
     }
   }
 
+  updateSignupPopup = () =>{
+    console.log("Got to update signup popup")
+    if(this.state.showSignupForm === 'signup-hide'){
+      this.setState({
+          showSignupForm: 'signup-show',
+          showLoginForm: 'loginform-hide'
+
+      })
+    }else{
+      this.setState({
+        showSignupForm: 'signup-hide'
+    })
+    }
+  }
+
   render() {
     const { isSignedIn, user } = this.state
     return (
@@ -147,8 +162,10 @@ export default class App extends React.Component {
           <Link to="/user/1">asdf</Link>
           <Route exact path="/user/:id" component={UserProfilePage} />
           <ScreenFader currentClass={this.state.showLoginForm} />
-          <LoginForm handleLogin={this.loginUser} currentClass={this.state.showLoginForm} toggleLoginPopup={this.updateLoginPopup}/>
+          <ScreenFader currentClass={this.state.showSignupForm} />
 
+          <LoginForm handleLogin={this.loginUser} currentClass={this.state.showLoginForm} toggleLoginPopup={this.updateLoginPopup} toggleSignupPopup={this.updateSignupPopup}/>
+          <SignUpForm currentClass={this.state.showSignupForm} toggleSignupPopup={this.updateSignupPopup}/>
         </main>
       </div>
     )
