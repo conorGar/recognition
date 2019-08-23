@@ -1,14 +1,9 @@
 import React from 'react'
 import HomepageHeader from '../../HomepageHeader'
 import { apiCall } from '../../../services/apiService'
-import { Link } from 'react-router-dom'
-import { async } from 'q'
-import ProjectIcon from '../../ProjectIcon'
 import GeneralCard from '../../Card'
 import Container from '../../Container'
-
 import './HomePage.css'
-import LoginForm from '../LoginForm'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -20,7 +15,8 @@ class HomePage extends React.Component {
       usernames: [],
       searchProjectResult: '',
       returnSearchResult: false,
-      searchSkill: []
+      searchSkill: [],
+      searchSkillResult: []
     }
   }
 
@@ -57,6 +53,9 @@ class HomePage extends React.Component {
       project =>
         project.name
           .toLocaleLowerCase()
+          .includes(filterValue.toLocaleLowerCase()) ||
+        project.skills
+          .toLocaleLowerCase()
           .includes(filterValue.toLocaleLowerCase())
     )
     const username = await this.state.usernames.filter(username =>
@@ -72,18 +71,6 @@ class HomePage extends React.Component {
       returnSearchResult: true
     })
   }
-
-  // findProjectSkill = async () => {
-  //   const { displayedProjects, searchSkill } = this.state
-  //   const projectOfSkill = displayedProjects.filter(project => {
-  //     ( searchSkill === project.skills) ? project : ''
-
-  //   })
-  //   console.log(projectOfSkill, displayedProjects[0].skills)
-  //   // if (this.state.searchSkill[0] === this.state.displayedProjects[0].skills) {
-  //   //    console.log('hello',  this.state.searchSkill)
-  //   // }
-  // }
 
   // Map through all the projects in the database and pass down needed data to the project icons
   createIcons = () => {
@@ -105,7 +92,8 @@ class HomePage extends React.Component {
   }
 
   renderSearchResult = () => {
-    const { searchProjectResult, displayedProjects, searchSkill } = this.state
+    const { searchProjectResult } = this.state
+    console.log(searchProjectResult)
     if (searchProjectResult.length) {
       //if there are projects in the array...
       return searchProjectResult.map(project => {
@@ -118,30 +106,48 @@ class HomePage extends React.Component {
           />
         )
       })
-    } else if (searchSkill.length) {
-      const project = displayedProjects.filter(project => {
-        if (searchSkill[0] === project.skills) return project
-      })
-      console.log(project)
-      project.map(project => {
-        return (
-          <GeneralCard
-            key={project.id}
-            title={project.name}
-            image={project.imgUrl}
-            link={`/project/${project.id}`}
-          />
-        )
-      })
     }
   }
 
+  setSearchSkillResult = async () => {
+    console.log('button works')
+    const { displayedProjects, searchSkill, searchSkillResult } = this.state
+    if (searchSkill.length) {
+      const project = await displayedProjects.filter(project => {
+        if (searchSkill[0] === project.skills) return project
+      })
+      // console.log(project)
+      await this.setState({
+        searchSkillResult: project,
+        searchSkillIsTrue: true
+      })
+    }
+    console.log(this.state.searchSkillResult, this.state.searchSkillIsTrue)
+  }
+
+  renderSearchSkill = () => {
+    const { searchSkillResult } = this.state
+    console.log(searchSkillResult)
+    searchSkillResult.map(project => {
+      return (
+        <GeneralCard
+          key={project.id}
+          title={project.name}
+          image={project.imgUrl}
+          link={`/project/${project.id}`}
+        />
+      )
+    })
+  }
+
   render() {
-    const { returnSearchResult, searchSkill } = this.state
+    const {
+      returnSearchResult,
+
+      searchSkillIsTrue
+    } = this.state
     console.log(this.state.displayedProjects)
     console.log(this.state.searchSkill)
-    // console.log(this.state.searchProjectResult)
-    // console.log(this.state.searchUsername)
 
     return (
       <div className="body">
@@ -155,11 +161,12 @@ class HomePage extends React.Component {
             username={this.state.searchUsername}
             fetchUserData={this.fetchUserData}
             fetchProjectData={this.fetchProjectData}
+            setSearchSkillResult={this.setSearchSkillResult}
           />
         </div>
 
-        {searchSkill == true ? (
-          <div className="icons-container">{this.renderSearchResult()}</div>
+        {searchSkillIsTrue === true ? (
+          <div className="icons-container">{this.renderSearchSkill()}</div>
         ) : (
           ''
         )}

@@ -50,6 +50,7 @@ class HomepageHeader extends React.Component {
     await this.props.fetchUserData()
     await this.props.fetchProjectData()
     await this.props.search(this.state.value)
+    await this.props.setSearchSkillResult()
     // console.log(this.props.username, value)
   }
 

@@ -4,6 +4,8 @@ import MaterialButton from '@material-ui/core/Button'
 
 import { apiCall } from '../../../services/apiService'
 
+import './LoginForm.css';
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -32,7 +34,9 @@ class LoginForm extends React.Component {
     const { handleLogin } = this.props
     try {
       await handleLogin({ username, password })
-      await this.props.history.push('/')
+      // await this.props.history.push(`/dashboard/${localStorage.getItem('userId')}`)
+      this.props.toggleLoginPopup()
+
     } catch (error) {
       this.setState(() => {
         return { showError: true }
@@ -63,51 +67,37 @@ class LoginForm extends React.Component {
     }
 
     return (
-      <Fragment>
-        <h2>Login</h2>
-        {showError ? (
-          <div
-            style={{
-              border: 'red 1px solid',
-              backgroundColor: '#FAE2E2',
-              padding: `${10}px`,
-              display: 'inline-table'
-            }}
-          >
-            {errMessage}
-          </div>
-        ) : (
-          ''
-        )}
-        <form className="form" >
-          <div>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              name="username"
-              onChange={this.handleTextInput}
-              value={this.state.username}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={this.handleTextInput}
-              value={this.state.password}
-            />
-          </div>
-          <MaterialButton
-                variant="contained"
-                onClick={this.handleSubmitForm}
-                style={{ margin: `${20}px` }}
-              >
-                Login
-              </MaterialButton>
-        </form>
-        <Link to="/user/signup">Create Account</Link>
-      </Fragment>
+      <Fragment >
+      {/* Hey! Not too familiar with Fragments.... is having a div redundant? a container called 'loginform-hide' is necessary for login popup to show properly */}
+      <div className={this.props.currentClass}> {/*  class changed to determine whether the login popup displays or not...*/}
+          <h2>Login</h2>
+          {errMessage}
+          <form className="form" onSubmit={this.handleSubmitForm}>
+            <div>
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                name="username"
+                onChange={this.handleTextInput}
+                defaultValue={this.state.username}
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                onChange={this.handleTextInput}
+                defaultValue={this.state.password}
+              />
+            </div>
+            <button className="login-button">Login</button>
+          </form>
+          <div className="signup-button" onClick={this.props.toggleSignupPopup}>Create New Account</div>
+          {/* <Link to="/user/signup">create new account</Link> */}
+          <div className="close-button" onClick={this.props.toggleLoginPopup}>X</div>
+      </div>
+    </Fragment>
     )
   }
 }

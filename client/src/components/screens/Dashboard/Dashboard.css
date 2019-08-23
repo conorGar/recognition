@@ -1,0 +1,54 @@
+.profile-project-pic {
+  width: 640px;
+  height: 360px;
+}
+
+.profile-container {
+  height: 100vh;
+  width: 90vw;
+}
+
+.head-container {
+  height: 300px;
+}
+
+/* .pro-proj-container {
+
+} */
+
+/* .prof-header {
+
+} */
+
+.prof-name {
+  font-size: 24px;
+}
+
+.prof-username {
+  font-size: 18px;
+}
+
+.prof-email {
+  font-size: 12px;
+}
+
+.prof-linkedin {
+  font-size: 12px;
+}
+
+.carousel-control-next {
+  height: 360px;  
+
+}
+
+.carousel-control-prev {
+  height: 360px;
+}
+
+.carousel-control-next-icon {
+  background-color: black;
+}
+
+.carousel-control-prev-icon {
+  background-color: black;
+}

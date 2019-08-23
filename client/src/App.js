@@ -10,13 +10,16 @@ import { login, signUp, getProfile } from './services/apiService'
 import authService from './services/authService'
 import ProtectedRoute from './components/ProtectedRoute'
 import HideAppBar from './components/HideAppBar'
+import Dashboard from './components/screens/Dashboard'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       user: {},
-      isSignedIn: false
+      isSignedIn: false,
+      showLoginForm: 'loginform-hide',
+      showSignupForm: 'signup-hide'
     }
   }
   componentDidMount = async () => {
@@ -68,14 +71,43 @@ export default class App extends React.Component {
         user: {}
       }
     })
-  
+  }
+
+  updateLoginPopup = () => {
+    if (this.state.showLoginForm === 'loginform-hide') {
+      this.setState({
+        showLoginForm: 'loginform-show'
+      })
+    } else {
+      this.setState({
+        showLoginForm: 'loginform-hide'
+      })
+    }
+  }
+
+  updateSignupPopup = () => {
+    console.log('Got to update signup popup')
+    if (this.state.showSignupForm === 'signup-hide') {
+      this.setState({
+        showSignupForm: 'signup-show',
+        showLoginForm: 'loginform-hide'
+      })
+    } else {
+      this.setState({
+        showSignupForm: 'signup-hide'
+      })
+    }
   }
 
   render() {
     const { isSignedIn, user } = this.state
     return (
       <div className="App">
-        <HideAppBar signOutUser={this.signOutUser} isSignedIn={isSignedIn} />
+        <HideAppBar
+          signOutUser={this.signOutUser}
+          isSignedIn={isSignedIn}
+          updatePopupStatus={this.updateLoginPopup}
+        />
 
         <main>
           ​
@@ -84,38 +116,41 @@ export default class App extends React.Component {
             path="/"
             render={props => <HomePage {...props} isSignedIn={isSignedIn} />}
           />
-          <Route
-            exact
-            path="/user/login"
-            render={props => (
-              <LoginForm {...props} handleLogin={this.loginUser} />
-            )}
-          />
           <Route exact path="/project/:id" component={Project} />
           <Route
             exact
             path="/user/signup"
             render={props => (
               <SignUpForm {...props} handleSignUp={this.signUpUser} />
-              )}
+            )}
           />
           <div>
             <ProtectedRoute
-              path="/dashboard"
+              path="/dashboard/:id"
               user={user}
-              component={HomePage}
+              component={Dashboard}
             />
             ​{' '}
           </div>
           {/* <Link to="/user/1">Profile Page</Link> */}
+          <LoginForm
+            handleLogin={this.loginUser}
+            currentClass={this.state.showLoginForm}
+            toggleLoginPopup={this.updateLoginPopup}
+            toggleSignupPopup={this.updateSignupPopup}
+          />
+          <SignUpForm
+            currentClass={this.state.showSignupForm}
+            toggleSignupPopup={this.updateSignupPopup}
+          />
         </main>
-              <Route
-                exact
-                path="/user/:id"
-                render={props => (
-                  <UserProfilePage {...props} isSignedIn={isSignedIn} />
-                )}
-              />
+        <Route
+          exact
+          path="/user/:id"
+          render={props => (
+            <UserProfilePage {...props} isSignedIn={isSignedIn} />
+          )}
+        />
       </div>
     )
   }
