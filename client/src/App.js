@@ -15,14 +15,16 @@ import HideAppBar from './components/HideAppBar'
 import ScreenFader from './components/common/ScreenFader/ScreenFader' //just used to fade screen during popups
 
 export default class App extends React.Component {
-  state = {
+  constructor(props) {
+    super(props)
+  this.state = {
     user: {},
     isSignedIn: false,
     showLoginForm: 'loginform-hide',
     showSignupForm: 'signup-hide'
 
   }
-
+  }
   componentDidMount = async () => {
     try {
       const fetchUser = await getProfile()
@@ -106,26 +108,16 @@ export default class App extends React.Component {
     const { isSignedIn, user } = this.state
     return (
       <div className="App">
+
         <HideAppBar signOutUser={this.signOutUser} isSignedIn={isSignedIn} updatePopupStatus={this.updateLoginPopup}/>
-        {/* <nav>
-          <Link to="/">Homepage</Link>
-          <Link to="/project/2">Project</Link>
 
-
-          {isSignedIn && (
-            <div>
-              <button onClick={this.signOutUser}>Signout</button>
-            </div>
-          )}
-          {!isSignedIn && <Link to="/user/login">Login</Link>}
-        </nav> */}
         <main>
-          ​
           <Route
             exact
             path="/"
             render={props => <HomePage {...props} isSignedIn={isSignedIn} /> }
           />
+          <Route exact path="/user/:id" component={UserProfilePage} />
           <Route exact path="/project/:id" component={Project} />
           <Route
             path="/user/signup"
@@ -156,9 +148,10 @@ export default class App extends React.Component {
               user={user}
               component={HomePage}
             />
-            ​{' '}
+            {' '}
             
           </div>
+
           <Link to="/user/1">asdf</Link>
           <Route exact path="/user/:id" component={UserProfilePage} />
           <ScreenFader currentClass={this.state.showLoginForm} />

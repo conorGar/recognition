@@ -14,18 +14,26 @@ class HomePage extends React.Component {
     this.state = {
       displayedProjects: [],
       projectImages: null,
+      usernames: [],
+      searchResult: '',
+      returnSearchResult: false
       showLoginForm: 'loginform-hide'
+
     }
   }
 
   componentDidMount = async () => {
     await this.fetchUserData()
     await this.fetchProjectData()
+    // await this.fetchProjectIncludesUserData()
   }
 
   fetchUserData = async () => {
-    await apiCall.get('/users').then(res => {
-    })
+    const userData = await apiCall.get('/users')
+    const usernames = userData.data.map(element => element.username)
+    this.setState(prevState => ({
+      usernames: usernames
+    }))
   }
 
   fetchProjectData = async () => {
@@ -39,28 +47,59 @@ class HomePage extends React.Component {
     })
   }
 
-  search = async filterValue => {
-    this.setState((prevState, props) => {
-      const filteredProjects = this.state.projects.filter(project =>
-        project.skills
-          .toLocaleLowerCase()
-          .includes(filterValue.toLocaleLowerCase())
-      )
+  // fetchProjectIncludesUserData = async () => {
+  //   // const id = this.state.displayedProjects.length -1
+  //   const userData = await apiCall.get(`/users/`)
+  //   console.log(userData.data)
+  //   const projectsArr = await userData.data.map(element => element.projects)
+  //   // const projects = await projectsArr.map(element=>element)
+  //   console.log(projectsArr)
+  //   const usersProjects = await projectsArr.map((element,index) => element[index])
+  //   console.log(usersProjects)
+  //   // const usersProjects = projectsArr.map(element => element)
+  //   // console.log(usersProjects)
+  //   // this.setState(prevState => ({
+  //   //   usernames: usernames
+  //   // }))
+  // }
 
-      return {
-        displayedProjects: filteredProjects
-      }
+  search = filterValue => {
+    const filteredProjects = this.state.displayedProjects.filter(project =>
+      project.name.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase())
+    )
+    this.setState({
+      searchResult: filteredProjects,
+      returnSearchResult: true
     })
   }
 
   // Map through all the projects in the database and pass down needed data to the project icons
   createIcons = () => {
     const { displayedProjects } = this.state
+    
     if (displayedProjects.length) {
       //if there are projects in the array...
       return displayedProjects.map(project => {
         return (
-          <GeneralCard key={project.id}
+          <GeneralCard
+            key={project.id}
+            title={project.name}
+            image={project.imgUrl}
+            link={`/project/${project.id}`}
+          />
+        )
+      })
+    }
+  }
+
+  renderSearchResult = () => {
+    const { searchResult } = this.state
+    if (searchResult.length) {
+      //if there are projects in the array...
+      return searchResult.map(project => {
+        return (
+          <GeneralCard
+            key={project.id}
             title={project.name}
             image={project.imgUrl}
             link={`/project/${project.id}`}
@@ -86,6 +125,9 @@ class HomePage extends React.Component {
 
 
   render() {
+    const { returnSearchResult } = this.state
+    // console.log(this.state.displayedProjects)
+    // console.log(this.state.usernames)
     return (
       <div className="body">
         <Container classname="homepage-container">
@@ -97,7 +139,11 @@ class HomePage extends React.Component {
             loginHandler={this.clickLoginOpen}
           />
         </div>
-       <div className="icons-container">{this.createIcons()}</div>
+        {returnSearchResult === true ? (
+          <div className="icons-container">{this.renderSearchResult()}</div>
+        ) : (
+          <div className="icons-container">{this.createIcons()}</div>
+        )}
 
       </div>
     )

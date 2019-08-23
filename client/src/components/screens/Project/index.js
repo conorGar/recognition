@@ -1,6 +1,8 @@
 import React from 'react'
 import './Project.css'
 import { apiCall } from '../../../services/apiService'
+import { Link } from 'react-router-dom'
+
 class Project extends React.Component {
     constructor(props) {
         super(props);
@@ -16,7 +18,7 @@ class Project extends React.Component {
       }
     componentDidMount = () => {
           this.getName()
-          document
+          document 
             .getElementsByTagName("HTML")[0]
             .setAttribute("data-theme", localStorage.getItem("theme"));      
     }
@@ -115,9 +117,9 @@ class Project extends React.Component {
                                 <h3>Contributors</h3>
                                 {users.map(user => {
                                     return (
-                                        <div key = {user.id}>
+                                        <Link key ={user} to={`/user/${user.id}`}>
                                             <h5 className='user-cred'>{user.name}</h5>
-                                        </div>
+                                        </Link>
                                     )
                                 })}
                             </div>
@@ -132,9 +134,9 @@ class Project extends React.Component {
                                 <h3>Contributors</h3>
                                 {users.map(user => {
                                     return (
-                                        <div key = {user.id}>
+                                        <Link key={user.id} to={`/user/${user.id}`}>
                                             <h5 className='user-cred'>{user.name}</h5>
-                                        </div>
+                                        </Link>
                                     )
                                 })}
                             </div>

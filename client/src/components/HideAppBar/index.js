@@ -12,7 +12,6 @@ import Container from '@material-ui/core/Container'
 import Slide from '@material-ui/core/Slide'
 import './HideAppBar.css'
 
-
 function HideOnScroll(props) {
   const { children, window } = props
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -35,6 +34,20 @@ HideOnScroll.propTypes = {
    */
   window: PropTypes.func
 }
+
+
+/*export default function HideAppBar(props) {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <HideOnScroll {...props}>
+        <AppBar
+          style={{
+            justifyContent: 'space-between',
+            background: '#333333'
+          }}
+        >
+          <Toolbar */
 
 
 
@@ -64,6 +77,15 @@ class HideAppBar extends React.Component {
               background: '#333333'
             }}
           >
+
+           <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
+              <Link to="/" className="links">
+                Homepage
+              </Link>
+            </MaterialButton>
+
+            {!props.isSignedIn && (
+
             <Toolbar
               style={{
                 display: 'flex',
@@ -71,15 +93,30 @@ class HideAppBar extends React.Component {
                 justifyContent: 'flex-end'
               }}
             >
+
               <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
                 <Link to="/" className="links">
                   Homepage
                 </Link>
               </MaterialButton>
+            )}
+
+            {props.isSignedIn && (
               <MaterialButton variant="contained" style={{ margin: `${20}px` }}>
-                <Link to="/project/2" className="links">
-                  Project
+                <Link to="/user/1" className="links">
+                  Profile Page
                 </Link>
+              </MaterialButton>
+            )}
+
+            {props.isSignedIn && (
+              <MaterialButton
+                onClick={props.signOutUser}
+                variant="contained"
+                style={{ margin: `${20}px` }}
+              >
+                Sign Out
+
               </MaterialButton>
 
               {!this.props.isSignedIn && (

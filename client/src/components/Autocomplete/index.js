@@ -156,34 +156,7 @@ function DownshiftMultiple(props) {
   const [inputValue, setInputValue] = React.useState('')
   const [selectedItem, setSelectedItem] = React.useState([])
 
-  // function handleKeyDown(event) {
-  //   if (
-  //     selectedItem.length &&
-  //     !inputValue.length &&
-  //     event.key === 'Backspace'
-  //   ) {
-  //     setSelectedItem(selectedItem.slice(0, selectedItem.length - 1))
-  //   }
-  // }
-
-  // function handleInputChange(event) {
-  //   setInputValue(event.target.value)
-  // }
-
-  // function handleChange(item) {
-  //   let newSelectedItem = [...selectedItem]
-  //   if (newSelectedItem.indexOf(item) === -1) {
-  //     newSelectedItem = [...newSelectedItem, item]
-  //   }
-  //   setInputValue('')
-  //   setSelectedItem(newSelectedItem)
-  // }
-
-  // const handleDelete = item => () => {
-  //   const newSelectedItem = [...selectedItem]
-  //   newSelectedItem.splice(newSelectedItem.indexOf(item), 1)
-  //   setSelectedItem(newSelectedItem)
-  // }
+ 
 
   return <div />
 }
@@ -345,3 +318,34 @@ export default function IntegrationDownshift(props) {
     </div>
   )
 }
+
+
+
+ // function handleKeyDown(event) {
+  //   if (
+  //     selectedItem.length &&
+  //     !inputValue.length &&
+  //     event.key === 'Backspace'
+  //   ) {
+  //     setSelectedItem(selectedItem.slice(0, selectedItem.length - 1))
+  //   }
+  // }
+
+  // function handleInputChange(event) {
+  //   setInputValue(event.target.value)
+  // }
+
+  // function handleChange(item) {
+  //   let newSelectedItem = [...selectedItem]
+  //   if (newSelectedItem.indexOf(item) === -1) {
+  //     newSelectedItem = [...newSelectedItem, item]
+  //   }
+  //   setInputValue('')
+  //   setSelectedItem(newSelectedItem)
+  // }
+
+  // const handleDelete = item => () => {
+  //   const newSelectedItem = [...selectedItem]
+  //   newSelectedItem.splice(newSelectedItem.indexOf(item), 1)
+  //   setSelectedItem(newSelectedItem)
+  // }
