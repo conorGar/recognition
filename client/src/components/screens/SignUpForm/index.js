@@ -1,23 +1,26 @@
 import React, { Fragment } from 'react'
 import { apiCall } from '../../../services/apiService'
 import './SignUpForm.css'
+import S3FileUpload from 'react-s3';
+import { AwsConfig } from '../../../services/AwsConfig'
 
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showError: false
+      showError: false,
+      imgUrl: ''
     }
   }
 
   handleSubmitForm = async evt => {
     evt.preventDefault()
 
-    const { name, username, password, email, linkedin } = this.state
+    const { name, username, password, email, linkedin, imgUrl } = this.state
     const { handleSignUp } = this.props
 
     try {
-      await handleSignUp({ name, username, password, email, linkedin })
+      await handleSignUp({ name, username, password, email, linkedin, imgUrl })
       // await this.props.history.push('/')
       this.props.toggleSignupPopup()
 
@@ -28,6 +31,18 @@ class SignUpForm extends React.Component {
       throw error
     }
   }
+
+  handleImageUpload = async (evt) => {
+    await S3FileUpload.uploadFile(evt.target.files[0], AwsConfig)
+        .then((data) => {
+            this.setState({
+                imgUrl: data.location
+            })
+            console.log("Upload success at:" + data.location);
+        }).catch((err) => {
+            alert(err);
+        })
+}
 
   handleTextInput = async evt => {
     const { name, value } = evt.target
@@ -53,62 +68,90 @@ class SignUpForm extends React.Component {
      
       <Fragment>
         <div className={this.props.currentClass}>
-          <h2>Signup</h2>
-          {errMessage}
-          <form className="form" onSubmit={this.handleSubmitForm}>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                required
-                type="text"
-                name="name"
-                onChange={this.handleTextInput}
-                value={this.state.name}
-              />
-            </div>
-            <div>
-              <label htmlFor="username">Username</label>
-              <input
-                required
-                type="text"
-                name="username"
-                onChange={this.handleTextInput}
-                value={this.state.username}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password</label>
-              <input
-                required
-                type="password"
-                name="password"
-                onChange={this.handleTextInput}
-                value={this.state.password}
-              />
-            </div>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                required
-                type="text"
-                name="email"
-                onChange={this.handleTextInput}
-                value={this.state.email}
-              />
-            </div>
-            <div>
-              <label htmlFor="linkedin">Linkedin</label>
-              <input
-                required
-                type="text"
-                name="linkedin"
-                onChange={this.handleTextInput}
-                value={this.state.linkedin}
-              />
-            </div>
-            <button className='signup-button-2'>Sign Up</button>
-          </form>
-          <div className="close-button" onClick={this.props.toggleSignupPopup}>X</div>
+          <div className="signup-left-side">
+          <h2 className="copy-text">Give Your Projects the Spotlight They Deserve.</h2>
+          </div>
+          <div className="signup-right-side" >
+            <h2>Signup</h2>
+            {errMessage}
+            <form className="signup-form" onSubmit={this.handleSubmitForm}>
+              <div>
+              <label htmlFor="uploadedImage" className='signup-label'>Profile Image</label>
+
+                <input
+                    name="uploadedImage"
+                    type="file"
+                    onChange={this.handleImageUpload}
+                    className='signup-input'
+                />
+              </div>
+              <div>
+                <label htmlFor="name" className='signup-label'>Name</label>
+                <input
+                  required
+                  type="text"
+                  name="name"
+                  onChange={this.handleTextInput}
+                  value={this.state.name}
+                  placeholder="Full Name"
+                  className='signup-input'
+
+                />
+              </div>
+              <div>
+                <label htmlFor="username" className='signup-label'>Username</label>
+                <input
+                  required
+                  type="text"
+                  name="username"
+                  onChange={this.handleTextInput}
+                  value={this.state.username}
+                  placeholder="Username"
+                  className='signup-input'
+
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className='signup-label'>Password</label>
+                <input
+                  required
+                  type="password"
+                  name="password"
+                  onChange={this.handleTextInput}
+                  value={this.state.password}
+                  placeholder="Password"
+                  className='signup-input'
+
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className='signup-label'>Email</label>
+                <input
+                  required
+                  type="text"
+                  name="email"
+                  onChange={this.handleTextInput}
+                  value={this.state.email}
+                  className='signup-input'
+
+                />
+              </div>
+              <div>
+                <label htmlFor="linkedin" className='signup-label'>Linkedin</label>
+                <input
+                  required
+                  type="text"
+                  name="linkedin"
+                  onChange={this.handleTextInput}
+                  value={this.state.linkedin}
+                  className='signup-input'
+
+                />
+              </div>
+              <button className='signup-button-2'>Sign Up</button>
+            </form>
+            <div className="close-button2" onClick={this.props.toggleSignupPopup}>X</div>
+          </div>
         </div>
       </Fragment>
     )
