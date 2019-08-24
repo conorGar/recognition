@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     // maxWidth: 345,
     width: '240px',
     margin: '20px 0px',
-    backgroundColor: '#a0f1ff'
+    backgroundColor: 'rgba(104, 161, 168, 0.1)'
 
   },
   media: {
@@ -73,13 +73,14 @@ export default function GeneralCard(props) {
     
         title={props.title}
       /> </Link>
-      <CardContent>
-        {/* <Typography variant="body2" color="textSecondary" component="p">
+
+      {/* <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook
           together with your guests. Add 1 cup of frozen peas along with the
           mussels, if you like.
-        </Typography> */}
-      </CardContent>
+        </Typography>
+      </CardContent> */}
       <CardActions disableSpacing>
         {/* link to project/blank page */}
         {/* <Link to={props.link}>
@@ -90,7 +91,7 @@ export default function GeneralCard(props) {
 
         {/* <IconButton aria-label="share">
         </IconButton> */}
-        <IconButton
+        {/* <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
           })}
@@ -98,7 +99,7 @@ export default function GeneralCard(props) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-        </IconButton>
+        </IconButton> */}
       </CardActions>
        
     </Card>

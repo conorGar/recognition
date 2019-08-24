@@ -138,8 +138,10 @@ class Project extends React.Component {
                                 <h3>Contributors</h3>
                                 {users.map(user => {
                                     return (
-                                        <Link key={user} to={`/user/${user.id}`}>
-                                            <h5 className='user-cred'>{user.name}</h5>
+                                       
+                                        <Link key={user} to={`/user/${user.id}`} classname="user-container">
+                                           
+                                            <h5 className='user-cred'> <img alt="user profile" src={user.imgUrl} className="user-profile-image"/>{user.name}</h5>
                                         </Link>
                                     )
                                 })}
