@@ -64,7 +64,7 @@ class Project extends React.Component {
         const skillz = skills.split(' ')
         return (
             <div id="page-container">
-                <div className="header">
+                {/* <div className="header">
                     {checked ? (
                         <h1 className="project-title">{title}</h1>
                     ) : (
@@ -81,10 +81,12 @@ class Project extends React.Component {
                             <span className="slider round" />
                         </label>
                     </div>
-                </div>
+                </div> */}
                 <div className="proj-holder">
+                  
                     {checked ? (
                         <div className="proj-left">
+                            
                             <img src={image} alt="ProjPic" className="project-pic"/>
                             <ul className='skill-list'>
                                 {skillz.map(skill => {
@@ -96,14 +98,16 @@ class Project extends React.Component {
                         </div>
                     ) : (
                         <div className="proj-left2">
+                            <h1 className="project-title2">{title}</h1>
                             <img src={image} alt="ProjPic" className="project-pic"/>
-                            <ul className='skill-list'>
+                            <div className='skill-list-container'>
+                                <h3>Skills</h3>
                                 {skillz.map(skill => {
                                     return (
-                                        <li key={skill} className='list-item'>{skill}</li>
+                                        <div key={skill} className='list-item'>{skill}</div>
                                     )
                                 })}
-                            </ul>
+                            </div>
                         </div>
                     )}
                     <div className="middy"/>
@@ -134,7 +138,7 @@ class Project extends React.Component {
                                 <h3>Contributors</h3>
                                 {users.map(user => {
                                     return (
-                                        <Link key={user.id} to={`/user/${user.id}`}>
+                                        <Link key={user} to={`/user/${user.id}`}>
                                             <h5 className='user-cred'>{user.name}</h5>
                                         </Link>
                                     )
@@ -142,6 +146,18 @@ class Project extends React.Component {
                             </div>
                         </div>
                     )}
+
+                    <div className="switch-container">
+                        {checked ? (<p className="night-mode">Night Mode</p>):(<p className="night-mode2">Night Mode</p>)}
+                        <label className="switch">
+                            <input 
+                                type="checkbox" 
+                                defaultChecked={this.state.checked}
+                                onChange={() => this.toggleThemeChange()}
+                            />
+                            <span className="slider round" />
+                        </label>
+                    </div>
                 </div>
             </div>
         )
