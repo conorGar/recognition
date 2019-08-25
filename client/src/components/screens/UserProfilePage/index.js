@@ -3,6 +3,8 @@ import { apiCall } from '../../../services/apiService'
 import './UserProfilePage.css'
 import { Link } from 'react-router-dom'
 import Carousel from 'react-bootstrap/Carousel'
+import linkedInLogo from '../../../assets/LinkedIn_logo.png'
+
 
 class UserProfilePage extends React.Component {
   constructor(props) {
@@ -20,7 +22,7 @@ class UserProfilePage extends React.Component {
     const response = await apiCall.get(`/users/${this.props.match.params.id}`)
     const {
       data: {
-        user: { name, username, email, linkedin, projects }
+        user: { name, username, email, linkedin, projects, imgUrl }
       }
     } = response
     this.setState({
@@ -28,7 +30,8 @@ class UserProfilePage extends React.Component {
       username,
       email,
       linkedin,
-      projects
+      projects, 
+      imgUrl
     })
   }
 
@@ -55,12 +58,18 @@ class UserProfilePage extends React.Component {
     const { name, username, email, linkedin } = this.state
     return (
       <div className="pro-proj-container">
-        <div className="prof-header">
-          <h1 className="prof-name">{name}</h1>
-          <h2 className="prof-username">{username}</h2>
-          <h3 className="prof-email">{email}</h3>
-          <h3 className="prof-linkedin">{linkedin}</h3>
-        </div>
+       <div className = 'profile-container'>
+            <div className='profile-left'>
+              <img src={this.state.imgUrl} className="profile-image"/>
+            </div>
+            <div className='profile-right'>
+              <h1 className="prof-name">{name}</h1>
+              <h2 className="prof-username">{username}</h2>
+              <h3 className="prof-email">{email}</h3>
+              <a href={linkedin}><img className="linkedin-logo" src={linkedInLogo}/></a>
+              <h3 className="prof-linkedin">{linkedin}</h3>
+            </div>
+          </div>
         <Carousel className="user-project-list">
           {this.renderProjects()}
         </Carousel>
