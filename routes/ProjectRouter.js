@@ -83,6 +83,7 @@ ProjectRouter.delete('/:id', async (request, response) => {
     const id = request.params.id
     const project = await Project.findByPk(id)
     if (!project) throw Error
+    await project.destroy()
     response.json({
       message: `Project with id ${id} deleted`
     })
