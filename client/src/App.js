@@ -11,6 +11,7 @@ import authService from './services/authService'
 import ProtectedRoute from './components/ProtectedRoute'
 import HideAppBar from './components/HideAppBar'
 import Dashboard from './components/screens/Dashboard'
+import EditProject from './components/screens/EditProject'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -120,9 +121,7 @@ export default class App extends React.Component {
           <Route
             exact
             path="/user/signup"
-            render={props => (
-              <SignUpForm {...props} handleSignUp={this.signUpUser} />
-            )}
+            render={props => <SignUpForm {...props} handleSignUp={this.signUpUser} />}
           />
           <div>
             <ProtectedRoute
@@ -146,7 +145,6 @@ export default class App extends React.Component {
             toggleSignupPopup={this.updateSignupPopup}
             isSignedIn={isSignedIn}
           />
-        </main>
         <Route
           exact
           path="/user/:id"
@@ -154,6 +152,14 @@ export default class App extends React.Component {
             <UserProfilePage {...props} isSignedIn={isSignedIn} />
           )}
         />
+        <Route
+          exact
+          path="/project/update/:id"
+          render={props => (
+            <EditProject {...props} isSignedIn={isSignedIn} />
+          )}
+        />
+        </main>
       </div>
     )
   }

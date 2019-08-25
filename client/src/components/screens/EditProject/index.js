@@ -13,7 +13,7 @@ class EditProject extends React.Component {
             description: '',
             skills: '',
             imgUrl: '',
-            link: 'fff',
+            link: '',
             username: ''
 
         }
@@ -23,7 +23,6 @@ class EditProject extends React.Component {
     componentDidMount = async () => {
         let id = this.props.match.params.id
         const thisProj = await apiCall.get(`project/${id}`)
-        console.log("component did mount: update Ice Cream" + thisProj);
         const { name, description, skills } = thisProj.data;
         this.setState({
             name: name,
