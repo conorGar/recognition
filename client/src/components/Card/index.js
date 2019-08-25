@@ -7,6 +7,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
+import CardActionArea from '@material-ui/core/CardActionArea';
 import Collapse from '@material-ui/core/Collapse'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
@@ -16,14 +17,16 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import { borderColor } from '@material-ui/system';
+import { borderColor, textAlign } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   card: {
     // maxWidth: 345,
     width: '240px',
     margin: '20px 0px',
-    backgroundColor: 'rgba(104, 161, 168, 0.1)'
+    backgroundColor:   'rgba(201, 247, 255, .3)',
+    textAlign: 'left',
+    color: 'white'
 
   },
   media: {
@@ -62,6 +65,7 @@ export default function GeneralCard(props) {
     
         title={props.title}
       /> </Link> */}
+      <CardActionArea>
       <Link to={props.link}>
         <CardMedia
           className={classes.media}
@@ -73,14 +77,12 @@ export default function GeneralCard(props) {
     
         title={props.title}
       /> </Link>
-
-      {/* <CardContent>
+</CardActionArea>
+      <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {props.description}
         </Typography>
-      </CardContent> */}
+      </CardContent>
       <CardActions disableSpacing>
         {/* link to project/blank page */}
         {/* <Link to={props.link}>
