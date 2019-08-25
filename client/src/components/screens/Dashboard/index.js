@@ -56,6 +56,8 @@ class Dashboard extends React.Component {
     return (
       <div className="pro-proj-container">
         <div className="prof-header">
+        <Link to={`/users/edit/${this.props.match.params.id}`}>Edit User</Link>
+
           <h1 className="prof-name">{name}</h1>
           <h2 className="prof-username">{username}</h2>
           <h3 className="prof-email">{email}</h3>

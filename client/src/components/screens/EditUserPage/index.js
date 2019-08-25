@@ -35,7 +35,7 @@ class EditUserPage extends React.Component {
     console.log("Handle project submit activate")
     try {
         await apiCall.put(`users/${id}`, { name, username, linkedin, email, password, imgUrl })
-        // await this.props.history.push('/')
+        await this.props.history.push(`/dashboard/${this.props.match.params.id}`)
     }
     catch (error) {
         throw error
