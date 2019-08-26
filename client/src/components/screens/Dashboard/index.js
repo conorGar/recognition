@@ -17,7 +17,7 @@ class Dashboard extends React.Component {
   }
 
   fetchUserInfo = async () => {
-    const response = await apiCall.get(`/users/${this.props.match.params.id}`)
+    const response = await apiCall.get(`/users/${localStorage.getItem('userId')}`)
     const {
       data: {
         user: { name, username, email, linkedin, projects }
@@ -30,6 +30,11 @@ class Dashboard extends React.Component {
       linkedin,
       projects
     })
+  }
+
+  deleteProject = async (id) => {
+    await apiCall.delete(`project/${id}`)
+    await this.fetchUserInfo()
   }
 
   renderProjects = () => {
@@ -46,6 +51,10 @@ class Dashboard extends React.Component {
               className="profile-project-pic"
             />
           </Link>
+          <div>
+            <Link to={`/project/update/${project.id}`}><button>Edit</button></Link>
+            <button onClick={() => this.deleteProject(project.id)}>Delete</button>
+          </div>
         </Carousel.Item>
       )
     })
