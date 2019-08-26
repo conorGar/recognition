@@ -107,6 +107,8 @@ class EditProject extends React.Component {
                                     name='skills'
                                     onChange={this.handleTextInput}
                                     value={this.state.skills}
+                                    placeholder="Seperate skills with a comma..."
+
                                 />
                             </div>
                         </div>
