@@ -45,29 +45,29 @@ const main = async () => {
       name: 'Project 1',
       imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
-      skills: 'HTML CSS',
-      link: 'somewebsite.com'
+      skills: 'HTML, CSS',
+      link: 'http://google.com'
     })
     const project2 = await Project.create({
       name: 'Project 2',
       imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
-      skills: 'Node.js Crud',
-      link: 'somewebsite.com'
+      skills: 'Node.js, Crud',
+      link: 'http://google.com'
     })
     const project3 = await Project.create({
       name: 'Project 3',
       imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
-      skills: 'React JS',
-      link: 'somewebsite.com'
+      skills: 'React, JS',
+      link: 'http://google.com'
     })
     const project4 = await Project.create({
       name: 'Project 4',
       imgUrl: 'http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi fugiat quam, sapiente molestiae, veritatis sed a eveniet odio enim assumenda unde harum facere aut soluta laborum ex officia cupiditate exercitationem!',
       skills: 'Crud',
-      link: 'somewebsite.com'
+      link: 'http://google.com'
     })
 
     await project1.setUsers(James)
@@ -78,7 +78,7 @@ const main = async () => {
     await Justin.addProject(project2)
     await project3.setUsers(James)
     await David.addProject(project3)
-    await Justin.addProject(project3)
+    await project4.setUsers(Connor)
 
   } catch (error) {
     throw error
