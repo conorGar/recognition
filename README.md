@@ -1,4 +1,4 @@
-# SITE NAME
+# Website
 [Recognition](https://icrud-recognition-app.herokuapp.com/)
 
 ## Description
