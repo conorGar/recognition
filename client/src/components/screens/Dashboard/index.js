@@ -1,9 +1,9 @@
 import React from 'react'
 import { apiCall } from '../../../services/apiService'
-import './Dashboard.css'
 import { Link } from 'react-router-dom'
 import Carousel from 'react-bootstrap/Carousel'
 import linkedInLogo from '../../../assets/LinkedIn_logo.png'
+import './Dashboard.css'
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -45,7 +45,11 @@ class Dashboard extends React.Component {
     return projects.map(project => {
       return (
         <Carousel.Item key={project.id} className="user-project">
-          <h3>{project.name}</h3>
+          <div className='project-header'>
+            <Link to={`/project/update/${project.id}`}><button>Edit</button></Link>
+            <h3>{project.name}</h3>
+            <button onClick={() => this.deleteProject(project.id)}>Delete</button>
+          </div>
           <Link to={`/project/${project.id}`}>
             <img
               src={project.imgUrl}
@@ -53,10 +57,6 @@ class Dashboard extends React.Component {
               className="profile-project-pic"
             />
           </Link>
-          <div>
-            <Link to={`/project/update/${project.id}`}><button>Edit</button></Link>
-            <button onClick={() => this.deleteProject(project.id)}>Delete</button>
-          </div>
         </Carousel.Item>
       )
     })
@@ -67,20 +67,22 @@ class Dashboard extends React.Component {
     return (
       <div className="pro-proj-container">
         <div className="prof-header">
-        <Link to={`/users/edit/${this.props.match.params.id}`}>Edit User</Link>
-          <div className = 'profile-container'>
+          <div className='profile-container'>
             <div className='profile-left'>
-              <img src={this.state.imgUrl} className="profile-image"/>
+              <img className="profile-image" src={this.state.imgUrl} alt='profile-pic' />
             </div>
             <div className='profile-right'>
               <h1 className="prof-name">{name}</h1>
               <h2 className="prof-username">{username}</h2>
               <h3 className="prof-email">{email}</h3>
-              <a href={linkedin}><img className="linkedin-logo" src={linkedInLogo}/></a>
-              <h3 className="prof-linkedin">{linkedin}</h3>
+              <a className='linkedin' href={linkedin}>
+                <img className="linkedin-logo" src={linkedInLogo} alt='linkedin' />
+                <h3 className="prof-linkedin">{linkedin}</h3>
+              </a>
+              <Link to={`/users/edit/${this.props.match.params.id}`}>Edit Profile</Link>
             </div>
           </div>
-    
+
         </div>
         <Carousel className="user-project-list">
           {this.renderProjects()}

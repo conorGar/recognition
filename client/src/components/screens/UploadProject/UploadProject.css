@@ -60,6 +60,10 @@
 
 }
 
+.input-container {
+    width: 500px;
+}
+
 
 .upload-project-container{
     background: linear-gradient(141deg, #a0f1ff, #3f6b8a, #89c9f6);

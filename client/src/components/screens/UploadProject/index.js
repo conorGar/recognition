@@ -86,14 +86,33 @@ class UploadProject extends React.Component {
                                     value={this.state.description}
                                 />
                             </div>
-                            <div className="input-skills-container">
+                            <div className="input-container">
+                                <label htmlFor='link'>Link</label>
+                                <input
+                                    type='text'
+                                    name='link'
+                                    onChange={this.handleTextInput}
+                                    value={this.state.link}
+                                />
+                            </div>
+                            <div className="input-container">
                                 <label htmlFor='skills'>Skills Used</label>
                                 <input
                                     type='text'
                                     name='skills'
                                     onChange={this.handleTextInput}
                                     value={this.state.skills}
-                                    placeholder="Seperate skills with a comma..."
+                                    placeholder="Example: HTML, CSS, etc."
+                                />
+                            </div>
+                            <div className="input-container">
+                                <label htmlFor='username'>Other Users</label>
+                                <input
+                                    type='text'
+                                    name='username'
+                                    onChange={this.handleTextInput}
+                                    value={this.state.username}
+                                    placeholder="Example: dgrosh123, jkim3360, etc."
                                 />
                             </div>
                         </div>

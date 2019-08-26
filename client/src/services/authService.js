@@ -7,6 +7,7 @@ const authService = {
 
   signOut: () => {
       localStorage.removeItem('token')
+      localStorage.removeItem('userId')
   }
 }
 

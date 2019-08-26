@@ -60,14 +60,16 @@ class UserProfilePage extends React.Component {
       <div className="pro-proj-container">
        <div className = 'profile-container'>
             <div className='profile-left'>
-              <img src={this.state.imgUrl} className="profile-image"/>
+              <img src={this.state.imgUrl} className="profile-image" alt='profile-pic'/>
             </div>
             <div className='profile-right'>
               <h1 className="prof-name">{name}</h1>
               <h2 className="prof-username">{username}</h2>
               <h3 className="prof-email">{email}</h3>
-              <a href={linkedin}><img className="linkedin-logo" src={linkedInLogo}/></a>
-              <h3 className="prof-linkedin">{linkedin}</h3>
+              <a className='linkedin' href={linkedin}>
+                <img className="linkedin-logo" src={linkedInLogo} alt='linkedin' />
+                <h3 className="prof-linkedin">{linkedin}</h3>
+              </a>
             </div>
           </div>
         <Carousel className="user-project-list">

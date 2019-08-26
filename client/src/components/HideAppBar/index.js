@@ -84,9 +84,6 @@ class HideAppBar extends React.Component {
                   >
                     Login
                   </MaterialButton>
-                  {/* <div className="links" onClick={this.handleLoginClick}>
-                    Login
-                  </div> */}
                 </Link>
               )}
 
