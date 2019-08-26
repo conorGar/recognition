@@ -14,7 +14,7 @@ class UploadProject extends React.Component {
             description: '',
             skills: '',
             imgUrl: '',
-            link: 'fff',
+            link: '',
             username: ''
         }
     }

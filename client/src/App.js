@@ -11,6 +11,7 @@ import authService from './services/authService'
 import ProtectedRoute from './components/ProtectedRoute'
 import HideAppBar from './components/HideAppBar'
 import Dashboard from './components/screens/Dashboard'
+import UploadProject from './components/screens/UploadProject';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -146,7 +147,11 @@ export default class App extends React.Component {
             toggleSignupPopup={this.updateSignupPopup}
             isSignedIn={isSignedIn}
           />
-        </main>
+        <Route
+          exact
+          path="/project/upload/user/:id"
+          component={UploadProject}
+        />
         <Route
           exact
           path="/user/:id"
@@ -154,6 +159,7 @@ export default class App extends React.Component {
             <UserProfilePage {...props} isSignedIn={isSignedIn} />
           )}
         />
+        </main>
       </div>
     )
   }

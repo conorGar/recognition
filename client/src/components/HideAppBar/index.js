@@ -92,6 +92,19 @@ class HideAppBar extends React.Component {
 
               {this.props.isSignedIn && (
                 <Link
+                  to={`/project/upload/user/${localStorage.getItem('userId')}`}
+                  className="links"
+                >
+                  <MaterialButton
+                    variant="contained"
+                    style={{ margin: `${20}px` }}
+                  >
+                    New Project
+                </MaterialButton></Link>
+              )}
+
+              {this.props.isSignedIn && (
+                <Link
                   to={`/dashboard/${localStorage.getItem('userId')}`}
                   className="links"
                 >
@@ -103,19 +116,19 @@ class HideAppBar extends React.Component {
                   </MaterialButton>
                 </Link>
               )}
-              
+
 
               {this.props.isSignedIn && (
                 <Link
-                to={'/'}
-                className="links"
-              >
-                <MaterialButton
-                  onClick={this.props.signOutUser}
-                  variant="contained"
-                  style={{ margin: `${20}px` }}
+                  to={'/'}
+                  className="links"
                 >
-                  Sign Out
+                  <MaterialButton
+                    onClick={this.props.signOutUser}
+                    variant="contained"
+                    style={{ margin: `${20}px` }}
+                  >
+                    Sign Out
                 </MaterialButton></Link>
               )}
             </Toolbar>
