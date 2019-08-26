@@ -17,3 +17,5 @@ The purpose of this site is for users to be judged and seen based on the work th
 6. Run `npm run dev` to start the servers
 7. You're all set! Server will update automatically when you save new code
 
+## Technology Used
+Javascript, React, CSS, Sequelize, Axios, Passport
