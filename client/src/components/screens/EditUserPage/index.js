@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react'
-import { Redirect } from 'react-router-dom'
-import './SignUpForm.css'
 import { apiCall } from '../../../services/apiService'
+import './EditUserPage.css'
 import S3FileUpload from 'react-s3';
 import { AwsConfig } from '../../../services/AwsConfig'
 
-class SignUpForm extends React.Component {
+class EditUserPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -14,24 +13,34 @@ class SignUpForm extends React.Component {
     }
   }
 
-  handleSubmitForm = async evt => {
-    evt.preventDefault()
+  componentDidMount = async () => {
+    let id = this.props.match.params.id
+    const thisUser = await apiCall.get(`users/edit/${id}`)
+    console.log("this user:" + thisUser.data)
+    const { name, username, linkedin, email, password, imgUrl } = thisUser.data;
+    this.setState({
+        name: name,
+        username:username,
+        linkedin: linkedin,
+        email: email,
+        password: password,
+        imgUrl: imgUrl
+    })
+}
 
+  handleProjectSubmit = async (e) => {
+    e.preventDefault();
     const { name, username, password, email, linkedin, imgUrl } = this.state
-    const { handleSignUp } = this.props
-
+    const id = this.props.match.params.id;
+    console.log("Handle project submit activate")
     try {
-      await handleSignUp({ name, username, password, email, linkedin, imgUrl })
-      // await this.props.history.push('/')
-      this.props.toggleSignupPopup()
-
-    } catch (error) {
-      this.setState(() => {
-        return { showError: true }
-      })
-      throw error
+        await apiCall.put(`users/${id}`, { name, username, linkedin, email, password, imgUrl })
+        await this.props.history.push(`/dashboard/${this.props.match.params.id}`)
     }
-  }
+    catch (error) {
+        throw error
+    }
+}
 
   handleImageUpload = async (evt) => {
     await S3FileUpload.uploadFile(evt.target.files[0], AwsConfig)
@@ -65,20 +74,14 @@ class SignUpForm extends React.Component {
         </div>
       )
     }
-
-    if (this.props.isSignedIn) {return <Redirect to={`/dashboard/${localStorage.getItem('userId')}`} />}
-
     return (
      
       <Fragment>
         <div className={this.props.currentClass}>
-          <div className="signup-left-side">
-          <h2 className="copy-text">Give Your Projects the Spotlight They Deserve.</h2>
-          </div>
-          <div className="signup-right-side" >
-            <h2>Signup</h2>
+          
+            <h2>Edit Profile</h2>
             {errMessage}
-            <form className="signup-form" onSubmit={this.handleSubmitForm}>
+            <form className="signup-form" onSubmit={this.handleProjectSubmit}>
               <div>
               <label htmlFor="uploadedImage" className='signup-label'>Profile Image</label>
 
@@ -99,6 +102,7 @@ class SignUpForm extends React.Component {
                   value={this.state.name}
                   placeholder="Full Name"
                   className='signup-input'
+                  defaultValue={this.state.name}
 
                 />
               </div>
@@ -152,14 +156,12 @@ class SignUpForm extends React.Component {
 
                 />
               </div>
-              <button className='signup-button-2'>Sign Up</button>
+              <button className='save-button-2'>Save Changes</button>
             </form>
-            <div className="close-button2" onClick={this.props.toggleSignupPopup}>X</div>
-          </div>
         </div>
       </Fragment>
     )
   }
 }
 
-export default SignUpForm
+export default EditUserPage

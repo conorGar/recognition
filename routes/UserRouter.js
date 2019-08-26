@@ -4,6 +4,8 @@ const UserRouter = express.Router()
 
 /********* GET -- localhost:PORT/ *********/
 UserRouter.get('/', async (request, response) => {
+
+  console.log("got here - user router")
   try {
     const users = await User.findAll()
     response.send(users)
@@ -14,15 +16,34 @@ UserRouter.get('/', async (request, response) => {
 
 /********* GET -- localhost:PORT/2 *********/
 UserRouter.get('/:id', async (request, response) => {
+  console.log("got here 2 - user router")
+
   try {
     const id = request.params.id
     const user = await User.findByPk(id, {
       include: [Project]
     })
+    console.log("User data grab: " + user);
     if (!user) throw Error('User not found')
     response.json({
       user
     })
+  } catch (e) {
+    response.status(404).json({ msg: e.message })
+  }
+})
+
+UserRouter.get('/edit/:id', async (request, response) => {
+  console.log("got here 2 - user router")
+
+  try {
+    const id = request.params.id
+    const user = await User.findByPk(id, {
+      include: [Project]
+    })
+    console.log("User data grab: " + user);
+    if (!user) throw Error('User not found')
+    response.send(user);
   } catch (e) {
     response.status(404).json({ msg: e.message })
   }

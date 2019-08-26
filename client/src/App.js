@@ -6,6 +6,7 @@ import Project from './components/screens/Project'
 import SignUpForm from './components/screens/SignUpForm'
 import LoginForm from './components/screens/LoginForm'
 import UserProfilePage from './components/screens/UserProfilePage'
+import EditUserPage from './components/screens/EditUserPage/index'
 import { login, signUp, getProfile } from './services/apiService'
 import authService from './services/authService'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -145,6 +146,7 @@ export default class App extends React.Component {
             currentClass={this.state.showSignupForm}
             toggleSignupPopup={this.updateSignupPopup}
             isSignedIn={isSignedIn}
+            handleSignUp={this.signUpUser}
           />
         <Route
           exact
@@ -166,6 +168,13 @@ export default class App extends React.Component {
           )}
         />
         </main>
+         <Route
+          exact
+          path="/users/edit/:id"
+          render={props => (
+            <EditUserPage {...props} isSignedIn={isSignedIn} />
+          )}
+        />
       </div>
     )
   }

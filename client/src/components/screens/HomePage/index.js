@@ -85,6 +85,8 @@ class HomePage extends React.Component {
             title={project.name}
             image={project.imgUrl}
             link={`/project/${project.id}`}
+            description={project.description}
+
           />
         )
       })
@@ -104,6 +106,8 @@ class HomePage extends React.Component {
             title={project.name}
             image={project.imgUrl}
             link={`/project/${project.id}`}
+            description={project.description}
+
           />
         )
       })
@@ -136,6 +140,7 @@ class HomePage extends React.Component {
           title={project.name}
           image={project.imgUrl}
           link={`/project/${project.id}`}
+          description={project.description}
         />
       )
     })
@@ -152,9 +157,7 @@ class HomePage extends React.Component {
 
     return (
       <div className="body">
-        <Container classname="homepage-container">
-          <div className="icons-container" />
-        </Container>
+       
         <div>
           <HomepageHeader
             search={this.search}
@@ -165,6 +168,9 @@ class HomePage extends React.Component {
             setSearchSkillResult={this.setSearchSkillResult}
           />
         </div>
+        {/* <Container classname="homepage-container">
+          <div className="icons-container" />
+        </Container> */}
 
         {searchSkillIsTrue === true ? (
           <div className="icons-container">{this.renderSearchSkill()}</div>

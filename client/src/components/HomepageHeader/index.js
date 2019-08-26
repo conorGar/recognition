@@ -1,7 +1,6 @@
 import React from 'react'
 import './HomepageHeader.css'
 import Searchbar from '../SearchBar'
-import CornerMenu from '../CornerMenu'
 import FadingIconPic from '../FadingIconPic/'
 import Card from '../Card'
 import IntegrationDownshift from '../Autocomplete'
@@ -59,9 +58,8 @@ class HomepageHeader extends React.Component {
     return (
       <Container className="body">
         <div className="background">
-          {/* <CornerMenu /> */}
           <div className="search-container">
-            <h2>Let Your Projects Speak For Themselves.</h2>
+            <h2>Let Projects Speak For Themselves.</h2>
             <form onSubmit={this.handleSubmit}>
               <Searchbar placeholder='Search Project or Skill' handleChange={this.handleChange} />
               <MaterialButton
@@ -73,8 +71,11 @@ class HomepageHeader extends React.Component {
               </MaterialButton>{' '}
             </form>
           </div>
+
+          {/* <div className ='corner-triangle'> */}
+            <FadingIconPic />
+          {/* </div> */}
           <div className="image-fader" />
-          <div className="corner-triangle" />
         </div>
       </Container>
     )
