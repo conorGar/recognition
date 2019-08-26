@@ -13,9 +13,9 @@ function FadingIconPic(){
                 
             </div>
             <div className="header-img" id="header-img1" ></div>
-            <div className="header-img" id="header-img2" ></div>
+            {/* <div className="header-img" id="header-img2" ></div>
             <div className="header-img" id="header-img3" ></div>
-            <div className="header-img" id="header-img4" ></div>
+            <div className="header-img" id="header-img4" ></div> */}
             </div>
         </div>
     )

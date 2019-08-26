@@ -21,8 +21,8 @@
     height: 100%;
     width: 400px;
     margin-left:30%;
-    animation: cf4FadeInOut 12s ease-in-out;
-    -webkit-animation: cf4FadeInOut 16s ease-in-out;
+    /* animation: cf4FadeInOut 12s ease-in-out;
+    -webkit-animation: cf4FadeInOut 16s ease-in-out; */
     position: absolute;
     background-size: cover;
     animation-iteration-count: infinite;
@@ -35,7 +35,7 @@
 
 #header-img1{
     animation-delay: 12s;
-    background-image: url('../../assets/icon_netflix.png')
+    background-image: url('../../assets/icon_desktop.png')
   
   }
   #header-img2{
